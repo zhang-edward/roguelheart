@@ -43,6 +43,7 @@ position = Vector2(-56, -13)
 script = ExtResource("1_73ntl")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_ks0ck")
 animation = &"attack"
 frame_progress = 0.785793

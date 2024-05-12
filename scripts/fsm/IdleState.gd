@@ -10,6 +10,7 @@ func physics_update(_delta: float) -> void:
 	pass
 
 func enter(_msg:={}) -> void:
+	sprite.play("default")
 	pass
 
 func exit() -> void:

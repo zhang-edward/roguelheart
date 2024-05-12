@@ -68,7 +68,8 @@ script = ExtResource("1_m5kpx")
 
 [node name="Sprite" parent="Player2" index="0"]
 sprite_frames = SubResource("SpriteFrames_yv776")
-frame_progress = 0.835956
+animation = &"default"
+frame_progress = 0.598969
 
 [node name="Attack" parent="Player2/StateMachine" index="2"]
 attack_interval = 2

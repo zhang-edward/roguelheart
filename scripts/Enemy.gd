@@ -3,6 +3,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 @onready var _state_machine: StateMachine = get_node("StateMachine")
+@onready var healthbar = get_node("Healthbar")
 var _health := 3
 
 func _ready():
@@ -12,12 +13,15 @@ func _ready():
 	
 	position = Vector2(x, y)
 	print("position spawned: " + str(position))
+	healthbar.value = _health
+	healthbar.max_value = _health
 	
 func set_attack_target(target: Node2D):
 	_state_machine.transition_to("Attack", {"target": target})
 
 func take_damage(amt: int) -> void:
 	_health -= amt
+	healthbar.value = _health
 	if _health <= 0:
 		queue_free()
 

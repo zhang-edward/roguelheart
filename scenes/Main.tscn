@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/PlayerPartyManager.gd" id="1_m5kpx"]
 [ext_resource type="PackedScene" uid="uid://uqjyppi50npj" path="res://prefab/Player.tscn" id="1_uys3c"]
 [ext_resource type="Texture2D" uid="uid://bd5i10cmpwubf" path="res://sprites/alienBlue_stand.png" id="2_kygx2"]
-[ext_resource type="Texture2D" uid="uid://de15fo6beh8fq" path="res://sprites/ghost.png" id="4_o3pmr"]
+[ext_resource type="PackedScene" uid="uid://c8mt2vgagi8cc" path="res://prefab/Enemy.tscn" id="4_i4ot6"]
 
 [node name="Main" type="Node2D"]
 
@@ -45,10 +45,7 @@ texture = ExtResource("2_kygx2")
 [node name="Player" parent="." instance=ExtResource("1_uys3c")]
 position = Vector2(2, 10)
 
-[node name="Enemy" type="Node2D" parent="."]
-position = Vector2(296, 10)
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
-texture = ExtResource("4_o3pmr")
+[node name="Enemy" parent="." instance=ExtResource("4_i4ot6")]
+position = Vector2(257, -4)
 
 [editable path="Player2"]

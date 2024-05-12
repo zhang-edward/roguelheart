@@ -32,3 +32,6 @@ func take_damage(amt: int) -> void:
 	_health -= amt
 	if _health <= 0:
 		queue_free()
+
+func is_dead() -> bool:
+	return _health <= 0

@@ -5,7 +5,7 @@ extends Node2D
 The Player class represents a player-controlled unit in the game.
 """
 
-var _health: int = 100
+var _health: int = 1
 
 @onready var sprite: AnimatedSprite2D = get_node("Sprite")
 @onready var area: Area2D = get_node("MousePickableArea")
@@ -31,7 +31,8 @@ func set_move_target(target: Vector2):
 func take_damage(amt: int) -> void:
 	_health -= amt
 	if _health <= 0:
-		queue_free()
+		visible = false
+		_state_machine.transition_to("Idle")
 
 func is_dead() -> bool:
 	return _health <= 0

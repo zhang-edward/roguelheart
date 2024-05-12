@@ -20,7 +20,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("1_6c54o")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 5.0
 }, {

@@ -9,6 +9,8 @@ and the currently selected player, and manages giving orders
 var selected_player: Player = null
 var players: Array = []
 
+@onready var player_variables: PlayerVariables = get_node("/root/PlayerVariables")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -18,6 +20,13 @@ func add_player(player: Player):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	if all_players_dead():
+		if player_variables.lives > 0:
+			player_variables.lives -= 1
+			get_tree().reload_current_scene()
+		else:
+			get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
+
 	for player in players:
 		if player != selected_player:
 			player.sprite.modulate = Color(1, 1, 1, 1)
@@ -55,3 +64,9 @@ func physics_query_entity(pos: Vector2) -> Node2D:
 	if result.size() == 0:
 		return
 	return result[0]['collider'].get_parent()
+
+func all_players_dead():
+	for player in players:
+		if !player.is_dead():
+			return false
+	return true

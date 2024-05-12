@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8mt2vgagi8cc"]
+[gd_scene load_steps=8 format=3 uid="uid://c8mt2vgagi8cc"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_4cwpj"]
 [ext_resource type="Texture2D" uid="uid://de15fo6beh8fq" path="res://sprites/ghost.png" id="1_6c54o"]
+[ext_resource type="Script" path="res://scripts/fsm/StateMachine.gd" id="3_5m8em"]
+[ext_resource type="Script" path="res://scripts/fsm/IdleState.gd" id="4_5qyw5"]
+[ext_resource type="Script" path="res://scripts/fsm/MoveState.gd" id="5_68pec"]
+[ext_resource type="Script" path="res://scripts/fsm/AttackState.gd" id="6_aaj38"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_my7uh"]
 radius = 40.0
@@ -18,3 +22,17 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MousePickableArea"]
 shape = SubResource("CircleShape2D_my7uh")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_5m8em")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_5qyw5")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource("5_68pec")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("6_aaj38")
+speed = 50

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/PlayerPartyManager.gd" id="1_m5kpx"]
 [ext_resource type="PackedScene" uid="uid://uqjyppi50npj" path="res://prefab/Player.tscn" id="1_uys3c"]
+[ext_resource type="PackedScene" uid="uid://d3tiuw84gdb1o" path="res://prefab/EnemyPartyManager.tscn" id="2_aye20"]
 [ext_resource type="Texture2D" uid="uid://bd5i10cmpwubf" path="res://sprites/alienBlue_stand.png" id="2_kygx2"]
-[ext_resource type="PackedScene" uid="uid://c8mt2vgagi8cc" path="res://prefab/Enemy.tscn" id="4_i4ot6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yv776"]
 animations = [{
@@ -56,7 +56,6 @@ sprite_frames = SubResource("SpriteFrames_yv776")
 [node name="Player" parent="." instance=ExtResource("1_uys3c")]
 position = Vector2(2, 10)
 
-[node name="Enemy" parent="." instance=ExtResource("4_i4ot6")]
-position = Vector2(257, -4)
+[node name="EnemyPartyManager" parent="." instance=ExtResource("2_aye20")]
 
 [editable path="Player2"]

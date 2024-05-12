@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3tiuw84gdb1o"]
+
+[ext_resource type="Script" path="res://scripts/EnemyPartyManager.gd" id="1_1qf1i"]
+[ext_resource type="PackedScene" uid="uid://c8mt2vgagi8cc" path="res://prefab/Enemy.tscn" id="2_mr7gw"]
+
+[node name="EnemyPartyManager" type="Node2D"]
+script = ExtResource("1_1qf1i")
+enemy_scene = ExtResource("2_mr7gw")

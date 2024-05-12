@@ -1,17 +1,16 @@
 class_name Enemy
 extends Node2D
 
+@onready var _state_machine: StateMachine = get_node("StateMachine")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_pressed("ui_right"):
-		translate(Vector2(1, 0) * delta * 100)
-	if Input.is_action_pressed("ui_left"):
-		translate(Vector2( - 1, 0) * delta * 100)
-	if Input.is_action_pressed("ui_up"):
-		translate(Vector2(0, -1) * delta * 100)
-	if Input.is_action_pressed("ui_down"):
-		translate(Vector2(0, 1) * delta * 100)
+	var screen_size = get_viewport().get_visible_rect().size
+	var x = randi_range(-screen_size.x / 2, screen_size.x / 2)
+	var y = randi_range(-screen_size.y / 2, screen_size.y / 2)
+	
+	position = Vector2(x, y)
+	print("position spawned: " + str(position))
+	
+func set_attack_target(target: Node2D):
+	_state_machine.transition_to("Attack", {"target": target})

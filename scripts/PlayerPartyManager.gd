@@ -25,14 +25,18 @@ func _process(_delta):
 			player.sprite.modulate = Color(1, 0, 0, 1)
 
 func _unhandled_input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_SPACE:
+			Engine.time_scale = 0 if Engine.time_scale == 1 else 1
+
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
 			var clicked_entity = physics_query_entity(get_global_mouse_position())
 			if clicked_entity is Player:
 				selected_player = clicked_entity
 			else:
 				selected_player = null
-		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if selected_player != null:
 				var clicked_entity = physics_query_entity(get_global_mouse_position())
 				if clicked_entity is Enemy:

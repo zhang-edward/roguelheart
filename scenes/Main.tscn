@@ -57,7 +57,8 @@ offset_bottom = 76.0
 grow_horizontal = 2
 size_flags_vertical = 0
 text = "Left click to select / deselect unit
-Right click to move selected unit"
+Right click to move selected unit
+Space to pause / resume"
 
 [node name="PlayerPartyManager" type="Node2D" parent="."]
 script = ExtResource("1_m5kpx")
@@ -74,9 +75,9 @@ frame_progress = 0.928656
 [node name="Attack" parent="Player2/StateMachine" index="2"]
 attack_interval = 2
 
-[node name="EnemyPartyManager" parent="." instance=ExtResource("2_aye20")]
-
 [node name="Player" parent="." instance=ExtResource("1_uys3c")]
 position = Vector2(92, -41)
+
+[node name="EnemyPartyManager" parent="." instance=ExtResource("2_aye20")]
 
 [editable path="Player2"]

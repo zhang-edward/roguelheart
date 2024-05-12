@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjbt5umbspxho"]
+[gd_scene load_steps=9 format=3 uid="uid://bjbt5umbspxho"]
 
+[ext_resource type="Script" path="res://scripts/LivesText.gd" id="1_8r2g4"]
 [ext_resource type="Script" path="res://scripts/PlayerPartyManager.gd" id="1_m5kpx"]
 [ext_resource type="PackedScene" uid="uid://uqjyppi50npj" path="res://prefab/Player.tscn" id="1_uys3c"]
 [ext_resource type="PackedScene" uid="uid://d3tiuw84gdb1o" path="res://prefab/EnemyPartyManager.tscn" id="2_aye20"]
@@ -59,6 +60,15 @@ size_flags_vertical = 0
 text = "Left click to select / deselect unit
 Right click to move selected unit
 Space to pause / resume"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUICanvasLayer/GUI"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 224.0
+offset_bottom = 64.0
+text = "Lives: "
+script = ExtResource("1_8r2g4")
 
 [node name="PlayerPartyManager" type="Node2D" parent="."]
 script = ExtResource("1_m5kpx")

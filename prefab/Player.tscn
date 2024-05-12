@@ -39,7 +39,7 @@ animations = [{
 radius = 40.0
 
 [node name="Player" type="Node2D"]
-position = Vector2(-56, -13)
+position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_73ntl")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]

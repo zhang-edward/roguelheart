@@ -1,9 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjbt5umbspxho"]
+[gd_scene load_steps=6 format=3 uid="uid://bjbt5umbspxho"]
 
 [ext_resource type="Script" path="res://scripts/PlayerPartyManager.gd" id="1_m5kpx"]
 [ext_resource type="PackedScene" uid="uid://uqjyppi50npj" path="res://prefab/Player.tscn" id="1_uys3c"]
 [ext_resource type="Texture2D" uid="uid://bd5i10cmpwubf" path="res://sprites/alienBlue_stand.png" id="2_kygx2"]
 [ext_resource type="PackedScene" uid="uid://c8mt2vgagi8cc" path="res://prefab/Enemy.tscn" id="4_i4ot6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yv776"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kygx2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Main" type="Node2D"]
 
@@ -39,8 +50,8 @@ script = ExtResource("1_m5kpx")
 
 [node name="Player2" parent="." instance=ExtResource("1_uys3c")]
 
-[node name="PlayerSprite" parent="Player2" index="0"]
-texture = ExtResource("2_kygx2")
+[node name="Sprite" parent="Player2" index="0"]
+sprite_frames = SubResource("SpriteFrames_yv776")
 
 [node name="Player" parent="." instance=ExtResource("1_uys3c")]
 position = Vector2(2, 10)

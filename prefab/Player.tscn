@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://uqjyppi50npj"]
+[gd_scene load_steps=10 format=3 uid="uid://uqjyppi50npj"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_73ntl"]
 [ext_resource type="Texture2D" uid="uid://chprwaf3to7mh" path="res://sprites/alienBeige_stand.png" id="2_um71p"]
@@ -8,6 +8,17 @@
 [ext_resource type="Script" path="res://scripts/DebugStateText.gd" id="6_0riig"]
 [ext_resource type="Script" path="res://scripts/fsm/AttackState.gd" id="6_ackvl"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_ks0ck"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_um71p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ywr4e"]
 radius = 40.0
 
@@ -15,8 +26,8 @@ radius = 40.0
 position = Vector2(-56, -13)
 script = ExtResource("1_73ntl")
 
-[node name="PlayerSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_um71p")
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ks0ck")
 
 [node name="MousePickableArea" type="Area2D" parent="."]
 monitorable = false
@@ -36,6 +47,8 @@ script = ExtResource("5_j58pb")
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_ackvl")
+
+[node name="AttackTimer" type="Timer" parent="StateMachine/Attack"]
 
 [node name="DebugStateText" type="RichTextLabel" parent="."]
 anchors_preset = 7

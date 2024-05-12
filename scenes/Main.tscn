@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/PlayerPartyManager.gd" id="1_m5kpx"]
 [ext_resource type="PackedScene" uid="uid://uqjyppi50npj" path="res://prefab/Player.tscn" id="1_uys3c"]
-[ext_resource type="PackedScene" path="res://prefab/EnemyPartyManager.tscn" id="2_aye20"]
+[ext_resource type="PackedScene" uid="uid://d3tiuw84gdb1o" path="res://prefab/EnemyPartyManager.tscn" id="2_aye20"]
 [ext_resource type="Texture2D" uid="uid://bd5i10cmpwubf" path="res://sprites/alienBlue_stand.png" id="2_kygx2"]
 [ext_resource type="Texture2D" uid="uid://c8txt2tlip6ob" path="res://sprites/alienBlue.png" id="3_b71dm"]
 [ext_resource type="Texture2D" uid="uid://c53ud0j7w20xv" path="res://sprites/alienGreen_stand.png" id="4_yivyn"]

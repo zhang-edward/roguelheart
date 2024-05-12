@@ -1,12 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://uqjyppi50npj"]
+[gd_scene load_steps=9 format=3 uid="uid://uqjyppi50npj"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_73ntl"]
 [ext_resource type="Texture2D" uid="uid://chprwaf3to7mh" path="res://sprites/alienBeige_stand.png" id="2_um71p"]
+[ext_resource type="Script" path="res://scripts/fsm/StateMachine.gd" id="3_ntdkd"]
+[ext_resource type="Script" path="res://scripts/fsm/IdleState.gd" id="4_lpjgd"]
+[ext_resource type="Script" path="res://scripts/fsm/MoveState.gd" id="5_j58pb"]
+[ext_resource type="Script" path="res://scripts/DebugStateText.gd" id="6_0riig"]
+[ext_resource type="Script" path="res://scripts/fsm/AttackState.gd" id="6_ackvl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ywr4e"]
 radius = 40.0
 
-[node name="Player2" type="Node2D"]
+[node name="Player" type="Node2D"]
 position = Vector2(-56, -13)
 script = ExtResource("1_73ntl")
 
@@ -18,3 +23,36 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MousePickableArea"]
 shape = SubResource("CircleShape2D_ywr4e")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_ntdkd")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_lpjgd")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource("5_j58pb")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("6_ackvl")
+
+[node name="DebugStateText" type="RichTextLabel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -80.0
+offset_right = 100.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(101, 17)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center]debug_state[/center]"
+script = ExtResource("6_0riig")
+metadata/_edit_use_anchors_ = true

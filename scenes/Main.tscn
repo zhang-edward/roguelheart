@@ -1,84 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://bjbt5umbspxho"]
 
-[ext_resource type="Script" path="res://scripts/Player.gd" id="1_cf1s8"]
-[ext_resource type="Texture2D" uid="uid://chprwaf3to7mh" path="res://sprites/alienBeige_stand.png" id="2_6ugl5"]
-
-[sub_resource type="GDScript" id="GDScript_7cefd"]
-script/source = "class_name PlayerPartyManager
-extends Node2D
-
-\"\"\"
-The PlayerPartManager class manages the player party. It keeps track of all the players in the party
-and the currently selected player, and manages giving orders
-\"\"\"
-
-var selected_player: Player = null
-var players: Array = []
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-func add_player(player: Player):
-	players.append(player)
-	player.player_selected.connect(on_player_selected)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	for player in players:
-		if player != selected_player:
-			player.modulate = Color(1, 1, 1, 1)
-		else:
-			player.modulate = Color(1, 0, 0, 1)
-
-func on_player_selected(player: Player):
-	if (selected_player == player):
-		selected_player = null
-	else:
-		selected_player = player
-		print(\"Player selected: \", player.name)
-
-func _unhandled_input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			if selected_player != null:
-				selected_player.set_move_target(get_global_mouse_position())
-"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ywr4e"]
-radius = 40.0
+[ext_resource type="Script" path="res://scripts/PlayerPartyManager.gd" id="1_m5kpx"]
+[ext_resource type="PackedScene" uid="uid://uqjyppi50npj" path="res://prefab/Player.tscn" id="1_uys3c"]
+[ext_resource type="Texture2D" uid="uid://bd5i10cmpwubf" path="res://sprites/alienBlue_stand.png" id="2_kygx2"]
+[ext_resource type="Texture2D" uid="uid://de15fo6beh8fq" path="res://sprites/ghost.png" id="4_o3pmr"]
 
 [node name="Main" type="Node2D"]
-
-[node name="PlayerPartyManager" type="Node2D" parent="."]
-script = SubResource("GDScript_7cefd")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="Player2" type="Node2D" parent="."]
-position = Vector2(-56, -13)
-script = ExtResource("1_cf1s8")
-
-[node name="PlayerSprite" type="Sprite2D" parent="Player2"]
-texture = ExtResource("2_6ugl5")
-
-[node name="MousePickableArea" type="Area2D" parent="Player2"]
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/MousePickableArea"]
-shape = SubResource("CircleShape2D_ywr4e")
-
-[node name="Player" type="Node2D" parent="."]
-script = ExtResource("1_cf1s8")
-
-[node name="PlayerSprite" type="Sprite2D" parent="Player"]
-texture = ExtResource("2_6ugl5")
-
-[node name="MousePickableArea" type="Area2D" parent="Player"]
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/MousePickableArea"]
-shape = SubResource("CircleShape2D_ywr4e")
 
 [node name="GUICanvasLayer" type="CanvasLayer" parent="."]
 
@@ -104,3 +31,24 @@ grow_horizontal = 2
 size_flags_vertical = 0
 text = "Left click to select / deselect unit
 Right click to move selected unit"
+
+[node name="PlayerPartyManager" type="Node2D" parent="."]
+script = ExtResource("1_m5kpx")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player2" parent="." instance=ExtResource("1_uys3c")]
+
+[node name="PlayerSprite" parent="Player2" index="0"]
+texture = ExtResource("2_kygx2")
+
+[node name="Player" parent="." instance=ExtResource("1_uys3c")]
+position = Vector2(2, 10)
+
+[node name="Enemy" type="Node2D" parent="."]
+position = Vector2(296, 10)
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+texture = ExtResource("4_o3pmr")
+
+[editable path="Player2"]

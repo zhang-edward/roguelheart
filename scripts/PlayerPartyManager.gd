@@ -15,7 +15,6 @@ func _ready():
 
 func add_player(player: Player):
 	players.append(player)
-	player.player_selected.connect(on_player_selected)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -25,15 +24,20 @@ func _process(_delta):
 		else:
 			player.modulate = Color(1, 0, 0, 1)
 
-func on_player_selected(player: Player):
-	if (selected_player == player):
-		selected_player = null
-	else:
-		selected_player = player
-		print("Player selected: ", player.name)
-
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			# Physics point query to see if we clicked on a player
+			var space_state = get_world_2d().direct_space_state
+			var query = PhysicsPointQueryParameters2D.new()
+			query.collide_with_areas = true
+			query.collide_with_bodies = false
+			query.position = get_global_mouse_position()
+			var result = space_state.intersect_point(query)
+			if result.size() > 0 and result[0]['collider'].get_parent() is Player:
+				selected_player = result[0]['collider'].get_parent()
+			else:
+				selected_player = null
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			if selected_player != null:
 				selected_player.set_move_target(get_global_mouse_position())

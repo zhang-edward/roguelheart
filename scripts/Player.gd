@@ -5,8 +5,6 @@ extends Node2D
 The Player class represents a player-controlled unit in the game.
 """
 
-@export var speed: float = 100
-
 @onready var sprite: AnimatedSprite2D = get_node("Sprite")
 @onready var area: Area2D = get_node("MousePickableArea")
 @onready var _state_machine: StateMachine = get_node("StateMachine")

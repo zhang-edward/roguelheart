@@ -1,11 +1,38 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8mt2vgagi8cc"]
+[gd_scene load_steps=11 format=3 uid="uid://c8mt2vgagi8cc"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_4cwpj"]
 [ext_resource type="Texture2D" uid="uid://de15fo6beh8fq" path="res://sprites/ghost.png" id="1_6c54o"]
+[ext_resource type="Texture2D" uid="uid://bvkkv67crstrg" path="res://sprites/slime.png" id="2_m4dvi"]
 [ext_resource type="Script" path="res://scripts/fsm/StateMachine.gd" id="3_5m8em"]
 [ext_resource type="Script" path="res://scripts/fsm/IdleState.gd" id="4_5qyw5"]
+[ext_resource type="Texture2D" uid="uid://coikxpubf6esv" path="res://sprites/spider.png" id="4_dj2ep"]
 [ext_resource type="Script" path="res://scripts/fsm/MoveState.gd" id="5_68pec"]
 [ext_resource type="Script" path="res://scripts/fsm/AttackState.gd" id="6_aaj38"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ubdcv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_m4dvi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_6c54o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_dj2ep")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6c54o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_my7uh"]
 radius = 40.0
@@ -14,8 +41,9 @@ radius = 40.0
 position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_4cwpj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_6c54o")
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ubdcv")
+animation = &"attack"
 
 [node name="MousePickableArea" type="Area2D" parent="."]
 monitorable = false
@@ -35,4 +63,3 @@ script = ExtResource("5_68pec")
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_aaj38")
-speed = 50

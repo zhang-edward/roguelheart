@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://uqjyppi50npj"]
+[gd_scene load_steps=13 format=3 uid="uid://uqjyppi50npj"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_73ntl"]
 [ext_resource type="Texture2D" uid="uid://ck4dlos8gfevw" path="res://sprites/alienBeige.png" id="2_ehymy"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/fsm/MoveState.gd" id="5_j58pb"]
 [ext_resource type="Script" path="res://scripts/DebugStateText.gd" id="6_0riig"]
 [ext_resource type="Script" path="res://scripts/fsm/AttackState.gd" id="6_ackvl"]
+[ext_resource type="PackedScene" uid="uid://btnesc72tysik" path="res://prefab/Healthbar.tscn" id="10_uua1x"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ks0ck"]
 animations = [{
@@ -74,9 +75,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -100.0
-offset_top = -80.0
+offset_top = -75.0
 offset_right = 100.0
-offset_bottom = -40.0
+offset_bottom = -35.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(101, 17)
@@ -86,3 +87,5 @@ bbcode_enabled = true
 text = "[center]debug_state[/center]"
 script = ExtResource("6_0riig")
 metadata/_edit_use_anchors_ = true
+
+[node name="Healthbar" parent="." instance=ExtResource("10_uua1x")]

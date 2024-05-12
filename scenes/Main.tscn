@@ -1,12 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjbt5umbspxho"]
+[gd_scene load_steps=8 format=3 uid="uid://bjbt5umbspxho"]
 
 [ext_resource type="Script" path="res://scripts/PlayerPartyManager.gd" id="1_m5kpx"]
 [ext_resource type="PackedScene" uid="uid://uqjyppi50npj" path="res://prefab/Player.tscn" id="1_uys3c"]
-[ext_resource type="PackedScene" uid="uid://d3tiuw84gdb1o" path="res://prefab/EnemyPartyManager.tscn" id="2_aye20"]
+[ext_resource type="PackedScene" path="res://prefab/EnemyPartyManager.tscn" id="2_aye20"]
 [ext_resource type="Texture2D" uid="uid://bd5i10cmpwubf" path="res://sprites/alienBlue_stand.png" id="2_kygx2"]
+[ext_resource type="Texture2D" uid="uid://c8txt2tlip6ob" path="res://sprites/alienBlue.png" id="3_b71dm"]
+[ext_resource type="Texture2D" uid="uid://c53ud0j7w20xv" path="res://sprites/alienGreen_stand.png" id="4_yivyn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yv776"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_b71dm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yivyn")
+}, {
+"duration": 2.0,
+"texture": ExtResource("2_kygx2")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 6.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_kygx2")
@@ -52,6 +68,10 @@ script = ExtResource("1_m5kpx")
 
 [node name="Sprite" parent="Player2" index="0"]
 sprite_frames = SubResource("SpriteFrames_yv776")
+frame_progress = 0.835956
+
+[node name="Attack" parent="Player2/StateMachine" index="2"]
+attack_interval = 2
 
 [node name="Player" parent="." instance=ExtResource("1_uys3c")]
 position = Vector2(2, 10)

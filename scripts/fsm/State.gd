@@ -10,6 +10,7 @@ var state_machine = null
 
 # Reference to the entity node, which should be the parent of the state machine
 @onready var entity = get_parent().get_parent()
+@onready var sprite: AnimatedSprite2D = entity.get_node("Sprite")
 
 # Virtual function. Receives events from the `_unhandled_input()` callback.
 func handle_input(_event: InputEvent) -> void:

@@ -26,7 +26,9 @@ func _ready():
 func _process(delta):
 	if _move_target != null:
 		translate((_move_target - position).normalized() * delta * speed)
-	pass
+		# Stop moving if we're close enough to the target
+		if (position - _move_target).length() < 1:
+			_move_target = null
 
 func set_move_target(target):
 	_move_target = target

@@ -9,27 +9,32 @@ const MIN_ATTACK_DISTANCE: float = 5
 const MAX_ATTACK_DISTANCE: float = 20
 
 var _target = null
+var _attacking := false
 # If approaching target from the left, then attack offset position will be on the left
 # Otherwise, it will be on the right
-var _approach_dir = Vector2.RIGHT
+var _approach_dir := Vector2.RIGHT
 var _attack_anim_speed_factor: float
 
 func _ready() -> void:
-	await entity.ready
 	sprite.frame_changed.connect(attack)
 	var attack_anim_duration = get_animation_duration(sprite.sprite_frames, ATTACK_ANIMATION_NAME)
 	_attack_anim_speed_factor = attack_anim_duration / attack_interval
-
-func update(_delta: float) -> void:
+	
+func physics_update(delta: float) -> void:
 	if _target == null or _target.is_dead():
 		state_machine.transition_to("Idle")
+		return
 
-func physics_update(delta: float) -> void:
-
+	# Target has to be within MIN_ATTACK_DISTANCE to start attacking
 	var attack_target_pos = _target.position + (_approach_dir * ATTACK_TARGET_OFFSET)
 	if (entity.position - attack_target_pos).length() < MIN_ATTACK_DISTANCE:
+		_attacking = true
 		sprite.play("attack", _attack_anim_speed_factor)
-	else:
+	# Target has to be outside MAX_ATTACK_DISTANCE to stop attacking
+	elif _attacking and (entity.position - attack_target_pos).length() > MAX_ATTACK_DISTANCE:
+		_attacking = false
+
+	if !_attacking:
 		sprite.play("default")
 		entity.translate((attack_target_pos - entity.position).normalized() * delta * move_speed)
 

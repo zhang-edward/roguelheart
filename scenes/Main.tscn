@@ -74,9 +74,9 @@ frame_progress = 0.928656
 [node name="Attack" parent="Player2/StateMachine" index="2"]
 attack_interval = 2
 
-[node name="Player" parent="." instance=ExtResource("1_uys3c")]
-position = Vector2(2, 10)
-
 [node name="EnemyPartyManager" parent="." instance=ExtResource("2_aye20")]
+
+[node name="Player" parent="." instance=ExtResource("1_uys3c")]
+position = Vector2(92, -41)
 
 [editable path="Player2"]

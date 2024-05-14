@@ -12,12 +12,14 @@ func _ready():
 	var y = randi_range( - screen_size.y / 2, screen_size.y / 2)
 	
 	position = Vector2(x, y)
-	print("position spawned: " + str(position))
 	healthbar.value = _health
 	healthbar.max_value = _health
 	
 func set_attack_target(target: Node2D):
 	_state_machine.transition_to("Attack", {"target": target})
+	
+func get_curr_state():
+	return _state_machine.state.name
 
 func take_damage(amt: int) -> void:
 	_health -= amt

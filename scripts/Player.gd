@@ -18,7 +18,6 @@ func _ready():
 	player_party_manager.add_player(self)
 	healthbar.value = _health
 	healthbar.max_value = _health
-	print(Vector2(1152, 648) * get_canvas_transform())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

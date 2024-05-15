@@ -63,7 +63,11 @@ func physics_query_entity(pos: Vector2) -> Node2D:
 	var result = space_state.intersect_point(query)
 	if result.size() == 0:
 		return
-	return result[0]['collider'].get_parent()
+	for collision in result:
+		var entity = collision['collider'].get_parent()
+		if (entity is Player or entity is Enemy) and !entity.is_dead():
+			return entity
+	return
 
 func all_players_dead():
 	for player in players:

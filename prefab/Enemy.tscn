@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c8mt2vgagi8cc"]
+[gd_scene load_steps=12 format=3 uid="uid://c8mt2vgagi8cc"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_4cwpj"]
 [ext_resource type="Texture2D" uid="uid://de15fo6beh8fq" path="res://sprites/ghost.png" id="1_6c54o"]
@@ -7,7 +7,8 @@
 [ext_resource type="Script" path="res://scripts/fsm/IdleState.gd" id="4_5qyw5"]
 [ext_resource type="Script" path="res://scripts/fsm/MoveState.gd" id="5_68pec"]
 [ext_resource type="Script" path="res://scripts/fsm/AttackState.gd" id="6_aaj38"]
-[ext_resource type="PackedScene" uid="uid://btnesc72tysik" path="res://prefab/Healthbar.tscn" id="8_yd4xw"]
+[ext_resource type="Script" path="res://scripts/fsm/FollowState.gd" id="8_htdkm"]
+[ext_resource type="PackedScene" uid="uid://btnesc72tysik" path="res://prefab/Healthbar.tscn" id="9_xw6cj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ubdcv"]
 animations = [{
@@ -21,7 +22,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("1_6c54o")
 }],
-"loop": false,
+"loop": true,
 "name": &"attack",
 "speed": 5.0
 }, {
@@ -67,8 +68,10 @@ speed = 50
 script = ExtResource("6_aaj38")
 move_speed = 50
 
-[node name="Healthbar" parent="." instance=ExtResource("8_yd4xw")]
-offset_left = -37.0
-offset_top = -57.0
-offset_right = 40.0
-offset_bottom = -51.0
+[node name="Follow" type="Node" parent="StateMachine"]
+script = ExtResource("8_htdkm")
+move_speed = 50
+
+[node name="Healthbar" parent="." instance=ExtResource("9_xw6cj")]
+offset_top = -60.0
+offset_bottom = -54.0

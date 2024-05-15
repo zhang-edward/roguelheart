@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://uqjyppi50npj"]
+[gd_scene load_steps=14 format=3 uid="uid://uqjyppi50npj"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_73ntl"]
 [ext_resource type="Texture2D" uid="uid://ck4dlos8gfevw" path="res://sprites/alienBeige.png" id="2_ehymy"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/fsm/MoveState.gd" id="5_j58pb"]
 [ext_resource type="Script" path="res://scripts/DebugStateText.gd" id="6_0riig"]
 [ext_resource type="Script" path="res://scripts/fsm/AttackState.gd" id="6_ackvl"]
+[ext_resource type="Script" path="res://scripts/fsm/FollowState.gd" id="9_03g4x"]
 [ext_resource type="PackedScene" uid="uid://btnesc72tysik" path="res://prefab/Healthbar.tscn" id="10_uua1x"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ks0ck"]
@@ -67,6 +68,9 @@ script = ExtResource("5_j58pb")
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_ackvl")
+
+[node name="Follow" type="Node" parent="StateMachine"]
+script = ExtResource("9_03g4x")
 
 [node name="DebugStateText" type="RichTextLabel" parent="."]
 anchors_preset = 7

@@ -20,10 +20,20 @@ func _ready():
 		enemies.append(enemy)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta: float):
+	
 	var living_players = player_party_manager.players.filter(func(p: Player): return !p.is_dead())
 	
 	if living_players.size() > 0:
 		for enemy in enemies:
 			if enemy.get_curr_state() == "Idle":
 				enemy.set_attack_target(living_players.pick_random())
+
+	if all_enemies_dead():
+		get_tree().reload_current_scene()
+
+func all_enemies_dead():
+	for enemy in enemies:
+		if !enemy.is_dead():
+			return false
+	return true

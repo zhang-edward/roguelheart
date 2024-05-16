@@ -1,16 +1,42 @@
 extends State
 
 @export var speed = 100
+@export var marker: PackedScene
 
 var _target = null
+var _curr_dest_marker: Node = null
+var _line_to_dest: Line2D = null
 
 func physics_update(delta: float) -> void:
 	if _target == null:
 		state_machine.transition_to("Idle")
 		return
 	entity.translate((_target - entity.position).normalized() * delta * speed)
-	if (entity.position - _target).length() < 1:
+	if (entity.position - _target).length() < 1 || entity.is_dead():
 		state_machine.transition_to("Idle")
+	if marker != null:
+		drawLineToTarget()
 
 func enter(msg:={}) -> void:
 	_target = msg.target
+	
+	# Display a move target marker
+	if marker != null:
+		_curr_dest_marker = marker.instantiate() as Node
+		add_child(_curr_dest_marker)
+		_curr_dest_marker.position = Vector2(_target.x, _target.y)
+
+func exit() -> void:
+	_curr_dest_marker.queue_free()
+	_line_to_dest.queue_free()
+	
+func drawLineToTarget():
+	if _line_to_dest == null:
+		_line_to_dest = Line2D.new()
+		add_child(_line_to_dest)
+		_line_to_dest.width = 10.0
+		_line_to_dest.default_color = Color(0, 0.71, 0, 1)
+	else:
+		_line_to_dest.clear_points()
+	_line_to_dest.add_point(Vector2(entity.position.x, entity.position.y))
+	_line_to_dest.add_point(Vector2(_target.x, _target.y))

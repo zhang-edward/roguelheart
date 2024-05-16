@@ -13,6 +13,7 @@ var _target = null
 # Otherwise, it will be on the right
 var _approach_dir := Vector2.RIGHT
 var _attack_anim_speed_factor: float
+var _line_to_dest: Line2D = null
 
 func _ready() -> void:
 	sprite.frame_changed.connect(attack)
@@ -29,6 +30,7 @@ func physics_update(_delta: float) -> void:
 	# Target has to be outside MAX_ATTACK_DISTANCE to stop attacking
 	if (entity.position - attack_target_pos).length() > MAX_ATTACK_DISTANCE:
 		state_machine.transition_to("Follow", {"target": _target})
+	
 
 func enter(msg:={}) -> void:
 	_target = msg.target

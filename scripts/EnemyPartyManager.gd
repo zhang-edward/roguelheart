@@ -28,6 +28,7 @@ func _process(_delta: float):
 		for enemy in enemies:
 			if !is_instance_valid(enemy):
 				continue
+			print(enemy.get_curr_state())
 			if enemy.get_curr_state() == "Idle":
 				enemy.set_attack_target(living_players.pick_random())
 

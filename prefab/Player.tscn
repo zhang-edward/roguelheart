@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://uqjyppi50npj"]
+[gd_scene load_steps=17 format=3 uid="uid://uqjyppi50npj"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_73ntl"]
 [ext_resource type="Texture2D" uid="uid://ck4dlos8gfevw" path="res://sprites/alienBeige.png" id="2_ehymy"]

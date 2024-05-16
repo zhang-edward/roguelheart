@@ -33,7 +33,8 @@ func enter(msg:={}) -> void:
 	sprite.play("default")
 	
 func exit() -> void:
-	_line_to_dest.queue_free()
+	if _line_to_dest != null:
+		_line_to_dest.queue_free()
 	
 func draw_line_to_target():
 	if _line_to_dest == null:

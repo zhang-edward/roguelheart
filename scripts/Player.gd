@@ -34,8 +34,8 @@ func set_attack_target(target: Node2D):
 	match unit_type:
 		UnitType.MELEE:
 			_state_machine.transition_to("Attack", {"target": target})
-		# UnitType.RANGED:
-		# 	_state_machine.transition_to("RangedAttack", {"target": target})
+		UnitType.RANGED:
+			_state_machine.transition_to("RangeAttack", {"target": target})
 		UnitType.HEALER:
 			_state_machine.transition_to("Heal", {"target": target})
 

@@ -48,7 +48,9 @@ func _unhandled_input(event):
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if selected_player != null:
 				var clicked_entity = physics_query_entity(get_global_mouse_position())
-				if clicked_entity is Enemy:
+				if clicked_entity is Enemy and (selected_player.unit_type == Player.UnitType.MELEE or selected_player.unit_type == Player.UnitType.RANGED):
+					selected_player.set_attack_target(clicked_entity)
+				elif clicked_entity is Player and (selected_player.unit_type == Player.UnitType.HEALER):
 					selected_player.set_attack_target(clicked_entity)
 				else:
 					selected_player.set_move_target(get_global_mouse_position())

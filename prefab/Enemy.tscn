@@ -67,6 +67,7 @@ speed = 50
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_aaj38")
 move_speed = 50
+attack_damage = 2
 
 [node name="Follow" type="Node" parent="StateMachine"]
 script = ExtResource("8_htdkm")

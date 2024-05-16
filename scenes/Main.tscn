@@ -12,6 +12,14 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_kygx2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("3_b71dm")
 }, {
 "duration": 1.0,
@@ -21,16 +29,8 @@ animations = [{
 "texture": ExtResource("2_kygx2")
 }],
 "loop": true,
-"name": &"attack",
+"name": &"heal",
 "speed": 6.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_kygx2")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
 }]
 
 [node name="Main" type="Node2D"]
@@ -76,11 +76,12 @@ script = ExtResource("1_m5kpx")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Player2" parent="." instance=ExtResource("1_uys3c")]
+unit_type = 2
 
 [node name="Sprite" parent="Player2" index="0"]
 sprite_frames = SubResource("SpriteFrames_yv776")
-animation = &"default"
-frame_progress = 0.928656
+animation = &"heal"
+frame_progress = 0.0
 
 [node name="Attack" parent="Player2/StateMachine" index="2"]
 attack_interval = 2

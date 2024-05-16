@@ -25,6 +25,7 @@ func take_damage(amt: int) -> void:
 	_health -= amt
 	healthbar.value = _health
 	if _health <= 0:
+		queue_free()
 		visible = false
 		_state_machine.transition_to("Idle")
 

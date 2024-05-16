@@ -23,7 +23,7 @@ animations = [{
 "texture": ExtResource("1_6c54o")
 }],
 "loop": true,
-"name": &"attack",
+"name": &"action",
 "speed": 5.0
 }, {
 "frames": [{
@@ -44,8 +44,9 @@ script = ExtResource("1_4cwpj")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
+position = Vector2(-2.08165e-12, -2.08165e-12)
 sprite_frames = SubResource("SpriteFrames_ubdcv")
-animation = &"attack"
+animation = &"action"
 
 [node name="MousePickableArea" type="Area2D" parent="."]
 monitorable = false
@@ -62,7 +63,7 @@ script = ExtResource("4_5qyw5")
 
 [node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource("5_68pec")
-speed = 50
+speed = 1
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_aaj38")
@@ -71,7 +72,7 @@ attack_damage = 2
 
 [node name="Follow" type="Node" parent="StateMachine"]
 script = ExtResource("8_htdkm")
-move_speed = 50
+move_speed = 1
 
 [node name="Healthbar" parent="." instance=ExtResource("9_xw6cj")]
 offset_top = -60.0

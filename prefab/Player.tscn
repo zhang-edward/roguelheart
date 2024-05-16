@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://uqjyppi50npj"]
+[gd_scene load_steps=16 format=3 uid="uid://uqjyppi50npj"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_73ntl"]
 [ext_resource type="Texture2D" uid="uid://ck4dlos8gfevw" path="res://sprites/alienBeige.png" id="2_ehymy"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://scripts/fsm/FollowState.gd" id="9_03g4x"]
 [ext_resource type="PackedScene" uid="uid://btnesc72tysik" path="res://prefab/Healthbar.tscn" id="10_uua1x"]
 [ext_resource type="Script" path="res://scripts/fsm/HealState.gd" id="10_wtoya"]
+[ext_resource type="Script" path="res://scripts/fsm/RangeAttackState.gd" id="11_88pcu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ks0ck"]
 animations = [{
@@ -26,7 +27,7 @@ animations = [{
 "texture": ExtResource("2_um71p")
 }],
 "loop": true,
-"name": &"attack",
+"name": &"action",
 "speed": 5.0
 }, {
 "frames": [{
@@ -48,8 +49,7 @@ script = ExtResource("1_73ntl")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_ks0ck")
-animation = &"attack"
-frame_progress = 0.785793
+animation = &"action"
 
 [node name="MousePickableArea" type="Area2D" parent="."]
 monitorable = false
@@ -75,6 +75,9 @@ script = ExtResource("9_03g4x")
 
 [node name="Heal" type="Node" parent="StateMachine"]
 script = ExtResource("10_wtoya")
+
+[node name="RangeAttack" type="Node" parent="StateMachine"]
+script = ExtResource("11_88pcu")
 
 [node name="DebugStateText" type="RichTextLabel" parent="."]
 anchors_preset = 7

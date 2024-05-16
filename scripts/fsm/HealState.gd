@@ -2,11 +2,8 @@ extends State
 
 @export var move_speed = 100
 @export var attack_interval = 1
-@export var attack_damage = 5
 
-const ATTACK_ANIMATION_NAME = "attack"
-const ATTACK_TARGET_OFFSET: float = 50
-const MAX_ATTACK_DISTANCE: float = 20
+const ANIMATION_NAME = "heal"
 
 var _target = null
 # If approaching target from the left, then attack offset position will be on the left
@@ -16,7 +13,7 @@ var _attack_anim_speed_factor: float
 
 func _ready() -> void:
 	sprite.frame_changed.connect(attack)
-	var attack_anim_duration = get_animation_duration(sprite.sprite_frames, ATTACK_ANIMATION_NAME)
+	var attack_anim_duration = get_animation_duration(sprite.sprite_frames, ANIMATION_NAME)
 	_attack_anim_speed_factor = attack_anim_duration / attack_interval
 	
 func physics_update(_delta: float) -> void:
@@ -24,24 +21,16 @@ func physics_update(_delta: float) -> void:
 		state_machine.transition_to("Idle")
 		return
 
-	# Target has to be within MIN_ATTACK_DISTANCE to start attacking
-	var attack_target_pos = _target.position + (_approach_dir * ATTACK_TARGET_OFFSET)
-	# Target has to be outside MAX_ATTACK_DISTANCE to stop attacking
-	if (entity.position - attack_target_pos).length() > MAX_ATTACK_DISTANCE:
-		state_machine.transition_to("Follow", {"target": _target})
-
 func enter(msg:={}) -> void:
 	_target = msg.target
 	_approach_dir = Vector2.RIGHT if msg.target.position.x < entity.position.x else Vector2.LEFT
-	sprite.play("attack", _attack_anim_speed_factor)
+	sprite.play(ANIMATION_NAME, _attack_anim_speed_factor)
 
 func attack() -> void:
 	# TODO: make attack frame configurable instead of always being frame 1
-	if _target == null or sprite.animation != "attack" or sprite.frame != 1:
+	if _target == null or sprite.animation != ANIMATION_NAME or sprite.frame != 1:
 		return
-	var attack_target_pos = _target.position + (_approach_dir * ATTACK_TARGET_OFFSET)
-	if (entity.position - attack_target_pos).length() < MAX_ATTACK_DISTANCE:
-		_target.take_damage(1)
+	_target.heal(10)
 
 # Gets the duration of an animation in seconds. Used to scale animation speed to explicitly set attack speed
 func get_animation_duration(sprite_frames: SpriteFrames, animation_name: StringName) -> float:

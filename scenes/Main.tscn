@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bjbt5umbspxho"]
+[gd_scene load_steps=13 format=3 uid="uid://bjbt5umbspxho"]
 
 [ext_resource type="Script" path="res://scripts/LivesText.gd" id="1_8r2g4"]
 [ext_resource type="Script" path="res://scripts/PlayerPartyManager.gd" id="1_m5kpx"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://bd5i10cmpwubf" path="res://sprites/alienBlue_stand.png" id="2_kygx2"]
 [ext_resource type="Texture2D" uid="uid://c8txt2tlip6ob" path="res://sprites/alienBlue.png" id="3_b71dm"]
 [ext_resource type="Texture2D" uid="uid://c53ud0j7w20xv" path="res://sprites/alienGreen_stand.png" id="4_yivyn"]
+[ext_resource type="Texture2D" uid="uid://ck4dlos8gfevw" path="res://sprites/alienBeige.png" id="7_pwitc"]
+[ext_resource type="Texture2D" uid="uid://coikxpubf6esv" path="res://sprites/spider.png" id="8_tunt2"]
+[ext_resource type="Texture2D" uid="uid://chprwaf3to7mh" path="res://sprites/alienBeige_stand.png" id="9_njsmc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yv776"]
 animations = [{
@@ -21,12 +24,37 @@ animations = [{
 "texture": ExtResource("2_kygx2")
 }],
 "loop": true,
-"name": &"attack",
+"name": &"action",
 "speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_kygx2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1lrwv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_pwitc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tunt2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_njsmc")
+}],
+"loop": true,
+"name": &"action",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_njsmc")
 }],
 "loop": true,
 "name": &"default",
@@ -75,19 +103,27 @@ script = ExtResource("1_m5kpx")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Player2" parent="." instance=ExtResource("1_uys3c")]
+[node name="Player_Healer" parent="." instance=ExtResource("1_uys3c")]
+unit_type = 2
 
-[node name="Sprite" parent="Player2" index="0"]
+[node name="Sprite" parent="Player_Healer" index="0"]
 sprite_frames = SubResource("SpriteFrames_yv776")
 animation = &"default"
-frame_progress = 0.928656
 
-[node name="Attack" parent="Player2/StateMachine" index="2"]
+[node name="Attack" parent="Player_Healer/StateMachine" index="2"]
 attack_interval = 2
 
 [node name="Player" parent="." instance=ExtResource("1_uys3c")]
 position = Vector2(92, -41)
 
+[node name="Player_Ranger" parent="." instance=ExtResource("1_uys3c")]
+position = Vector2(108, 133)
+unit_type = 1
+
+[node name="Sprite" parent="Player_Ranger" index="0"]
+sprite_frames = SubResource("SpriteFrames_1lrwv")
+
 [node name="EnemyPartyManager" parent="." instance=ExtResource("2_aye20")]
 
-[editable path="Player2"]
+[editable path="Player_Healer"]
+[editable path="Player_Ranger"]

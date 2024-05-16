@@ -4,8 +4,15 @@ extends Node2D
 """
 The Player class represents a player-controlled unit in the game.
 """
+enum UnitType {
+	MELEE,
+	RANGED,
+	HEALER
+}
 
-var _health: int = 5
+@export var unit_type: UnitType = UnitType.MELEE
+
+var _health: int = 50
 
 @onready var sprite: AnimatedSprite2D = get_node("Sprite")
 @onready var area: Area2D = get_node("MousePickableArea")
@@ -24,7 +31,13 @@ func _process(_delta):
 	pass
 
 func set_attack_target(target: Node2D):
-	_state_machine.transition_to("Attack", {"target": target})
+	match unit_type:
+		UnitType.MELEE:
+			_state_machine.transition_to("Attack", {"target": target})
+		UnitType.RANGED:
+			_state_machine.transition_to("RangeAttack", {"target": target})
+		UnitType.HEALER:
+			_state_machine.transition_to("Heal", {"target": target})
 
 func set_move_target(target: Vector2):
 	_state_machine.transition_to("Move", {"target": target})
@@ -36,6 +49,10 @@ func take_damage(amt: int) -> void:
 	if _health <= 0:
 		visible = false
 		_state_machine.transition_to("Idle")
+
+func heal(amt: int) -> void:
+	_health += amt
+	healthbar.value = _health
 
 func is_dead() -> bool:
 	return _health <= 0

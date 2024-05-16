@@ -4,7 +4,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 @onready var _state_machine: StateMachine = get_node("StateMachine")
 @onready var healthbar = get_node("Healthbar")
-var _health := 3
+var _health := 10
 
 func _ready():
 	var screen_size = get_viewport().get_visible_rect().size
@@ -25,6 +25,7 @@ func take_damage(amt: int) -> void:
 	_health -= amt
 	healthbar.value = _health
 	if _health <= 0:
+		queue_free()
 		visible = false
 		_state_machine.transition_to("Idle")
 

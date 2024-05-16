@@ -26,6 +26,8 @@ func _process(_delta: float):
 	
 	if living_players.size() > 0:
 		for enemy in enemies:
+			if !is_instance_valid(enemy):
+				continue
 			if enemy.get_curr_state() == "Idle":
 				enemy.set_attack_target(living_players.pick_random())
 
@@ -34,6 +36,8 @@ func _process(_delta: float):
 
 func all_enemies_dead():
 	for enemy in enemies:
+		if !is_instance_valid(enemy):
+			continue
 		if !enemy.is_dead():
 			return false
 	return true

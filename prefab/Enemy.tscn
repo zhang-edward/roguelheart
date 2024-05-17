@@ -74,16 +74,12 @@ script = ExtResource("4_5qyw5")
 
 [node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource("5_68pec")
-speed = 50
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_aaj38")
-move_speed = 50
-attack_damage = 2
 
 [node name="Follow" type="Node" parent="StateMachine"]
 script = ExtResource("8_htdkm")
-move_speed = 50
 
 [node name="Healthbar" parent="." instance=ExtResource("9_xw6cj")]
 offset_top = -60.0

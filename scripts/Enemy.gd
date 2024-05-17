@@ -7,6 +7,10 @@ extends Node2D
 @onready var sprite: AnimatedSprite2D = get_node("Sprite")
 
 var _health := 10
+var attack_power: int = 5
+var heal_power: int = 10
+var attack_speed: int = 1
+var move_speed: int = 100
 
 func _ready():
 	var screen_size = get_viewport().get_visible_rect().size
@@ -17,6 +21,15 @@ func _ready():
 	healthbar.value = _health
 	healthbar.max_value = _health
 	
+func init(config: Dictionary):
+	_health = config.health
+	attack_power = config.attack_power
+	heal_power = config.heal_power
+	attack_speed = config.attack_speed
+	move_speed = config.move_speed
+	# TODO: load sprite frames
+	# sprite.sprite_frames = load(config.sprite_frames_path) 
+
 func set_attack_target(target: Node2D):
 	_state_machine.transition_to("Attack", {"target": target})
 	

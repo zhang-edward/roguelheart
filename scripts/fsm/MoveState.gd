@@ -1,6 +1,5 @@
 extends State
 
-@export var speed = 100
 @export var marker: PackedScene
 
 var _target = null
@@ -11,8 +10,8 @@ func physics_update(delta: float) -> void:
 	if _target == null:
 		state_machine.transition_to("Idle")
 		return
-	entity.translate((_target - entity.position).normalized() * delta * speed)
-	if (entity.position - _target).length() < 1 || entity.is_dead():
+	entity.translate((_target - entity.position).normalized() * delta * entity.move_speed)
+	if (entity.position - _target).length() < 1:
 		state_machine.transition_to("Idle")
 	if marker != null:
 		drawLineToTarget()

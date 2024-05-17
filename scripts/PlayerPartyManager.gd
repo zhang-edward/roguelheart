@@ -6,6 +6,8 @@ The PlayerPartManager class manages the player party. It keeps track of all the 
 and the currently selected player, and manages giving orders
 """
 
+@export var player_scene: PackedScene
+
 var selected_player: Player = null
 var players: Array = []
 
@@ -13,7 +15,13 @@ var players: Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	for i in range(player_variables.party_data.size()):
+		var player_data = player_variables.party_data[i]
+		var new_player = player_scene.instantiate()
+		new_player.position = Vector2(i * 100 - 100, 0)
+		add_child(new_player)
+		new_player.init(player_data)
+		add_player(new_player)
 
 func add_player(player: Player):
 	players.append(player)

@@ -1,8 +1,5 @@
+class_name AttackState
 extends State
-
-@export var move_speed = 100
-@export var attack_interval = 1
-@export var attack_damage = 5
 
 const ATTACK_ANIMATION_NAME = "action"
 const ATTACK_TARGET_OFFSET: float = 50
@@ -18,6 +15,7 @@ var _line_to_dest: Line2D = null
 func _ready() -> void:
 	sprite.frame_changed.connect(attack)
 	var attack_anim_duration = get_animation_duration(sprite.sprite_frames, ATTACK_ANIMATION_NAME)
+	var attack_interval = 1 / entity.attack_speed
 	_attack_anim_speed_factor = attack_anim_duration / attack_interval
 	
 func physics_update(_delta: float) -> void:
@@ -51,7 +49,7 @@ func attack() -> void:
 		return
 	var attack_target_pos = _target.position + (_approach_dir * ATTACK_TARGET_OFFSET)
 	if (entity.position - attack_target_pos).length() < MAX_ATTACK_DISTANCE:
-		_target.take_damage(attack_damage)
+		_target.take_damage(entity.attack_power)
 
 # Gets the duration of an animation in seconds. Used to scale animation speed to explicitly set attack speed
 func get_animation_duration(sprite_frames: SpriteFrames, animation_name: StringName) -> float:

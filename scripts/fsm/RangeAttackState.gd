@@ -1,8 +1,6 @@
 extends State
 
-@export var attack_interval = 1
-@export var attack_damage = 5
-@export var projectile_travel_speed = 50
+@export var projectile_travel_speed = 500
 
 const ATTACK_ANIMATION_NAME = "action"
 
@@ -17,6 +15,7 @@ var _line_to_dest: Line2D = null
 func _ready() -> void:
 	sprite.frame_changed.connect(attack)
 	var attack_anim_duration = get_animation_duration(sprite.sprite_frames, ATTACK_ANIMATION_NAME)
+	var attack_interval = 1 / entity.attack_speed
 	_attack_anim_speed_factor = attack_anim_duration / attack_interval
 	
 func physics_update(_delta: float) -> void:
@@ -56,7 +55,7 @@ func attack() -> void:
 	# Spawn projectile
 	var projectile_instance = _projectile.instantiate()
 	entity.get_parent().add_child(projectile_instance)
-	projectile_instance.init(timer, _target, entity.position, projectile_travel_time, attack_damage)
+	projectile_instance.init(timer, _target, entity.position, projectile_travel_time, entity.attack_power)
 
 # Gets the duration of an animation in seconds. Used to scale animation speed to explicitly set attack speed
 func get_animation_duration(sprite_frames: SpriteFrames, animation_name: StringName) -> float:

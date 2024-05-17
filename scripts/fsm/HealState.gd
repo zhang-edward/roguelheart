@@ -1,9 +1,5 @@
 extends State
 
-@export var move_speed = 100
-@export var attack_interval = 1
-@export var heal_amt = 10
-
 const ANIMATION_NAME = "action"
 
 var _target = null
@@ -15,6 +11,7 @@ var _attack_anim_speed_factor: float
 func _ready() -> void:
 	sprite.frame_changed.connect(attack)
 	var attack_anim_duration = get_animation_duration(sprite.sprite_frames, ANIMATION_NAME)
+	var attack_interval = 1 / entity.attack_speed
 	_attack_anim_speed_factor = attack_anim_duration / attack_interval
 	
 func physics_update(_delta: float) -> void:
@@ -31,7 +28,7 @@ func attack() -> void:
 	# TODO: make attack frame configurable instead of always being frame 1
 	if _target == null or sprite.animation != ANIMATION_NAME or sprite.frame != 1:
 		return
-	_target.heal(heal_amt)
+	_target.heal(entity.heal_power)
 
 # Gets the duration of an animation in seconds. Used to scale animation speed to explicitly set attack speed
 func get_animation_duration(sprite_frames: SpriteFrames, animation_name: StringName) -> float:

@@ -16,31 +16,42 @@ var _health: int = 50
 var _is_hovering: bool = false
 var _player_party_manager: PlayerPartyManager = null
 var _line_to_dest: Line2D = null
+var attack_power: int = 5
+var heal_power: int = 10
+var attack_speed: int = 1
+var move_speed: int = 100
 
 @onready var sprite: AnimatedSprite2D = get_node("Sprite")
 @onready var area: Area2D = get_node("MousePickableArea")
 @onready var _state_machine: StateMachine = get_node("StateMachine")
 @onready var healthbar: ProgressBar = get_node("Healthbar")
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_player_party_manager = get_node("/root/Main/PlayerPartyManager") as PlayerPartyManager
-	_player_party_manager.add_player(self)
 	healthbar.value = _health
 	healthbar.max_value = _health
-	var material = sprite.material as ShaderMaterial
-	material.set_shader_parameter('width', 0)
+	var _material = sprite.material as ShaderMaterial
+	_material.set_shader_parameter('width', 0)
+
+func init(config: Dictionary):
+	_health = config.health
+	unit_type = config.unit_type
+	attack_power = config.attack_power
+	heal_power = config.heal_power
+	attack_speed = config.attack_speed
+	move_speed = config.move_speed
+	sprite.sprite_frames = load(config.sprite_frames_path)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	var material = sprite.material as ShaderMaterial
+	var _material = sprite.material as ShaderMaterial
 	if _player_party_manager.selected_player == self:
-		material.set_shader_parameter('width', 5)
-		material.set_shader_parameter('color', Color(0, 1.0, 0, 1))
+		_material.set_shader_parameter('width', 5)
+		_material.set_shader_parameter('color', Color(0, 1.0, 0, 1))
 	else:
 		if !_is_hovering:
-			material.set_shader_parameter('width', 0)
+			_material.set_shader_parameter('width', 0)
 
 func set_attack_target(target: Node2D):
 	match unit_type:
@@ -72,12 +83,12 @@ func is_dead() -> bool:
 func is_selected() -> bool:
 	return _player_party_manager.selected_player == self
 
-func _on_mouse_pickable_area_mouse_shape_entered(shape_idx):
+func _on_mouse_pickable_area_mouse_shape_entered(_shape_idx):
 	_is_hovering = true
 	sprite.material.set_shader_parameter('color', Color(1, 0.855, 0, 1))
 	sprite.material.set_shader_parameter('width', 5)
 
-func _on_mouse_pickable_area_mouse_shape_exited(shape_idx):
+func _on_mouse_pickable_area_mouse_shape_exited(_shape_idx):
 	_is_hovering = false
 	
 func highlight_target(enemy: Enemy):

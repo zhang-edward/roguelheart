@@ -1,16 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://uqjyppi50npj"]
+[gd_scene load_steps=15 format=3 uid="uid://uqjyppi50npj"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_73ntl"]
-[ext_resource type="Texture2D" uid="uid://ck4dlos8gfevw" path="res://sprites/alienBeige.png" id="2_ehymy"]
+[ext_resource type="SpriteFrames" uid="uid://baupxywflmfm4" path="res://character_animations/Player2.tres" id="2_heebf"]
 [ext_resource type="Shader" path="res://shaders/Outline.gdshader" id="2_t2jas"]
-[ext_resource type="Texture2D" uid="uid://chprwaf3to7mh" path="res://sprites/alienBeige_stand.png" id="2_um71p"]
-[ext_resource type="Texture2D" uid="uid://btaup5lhgnqr4" path="res://sprites/alienBeige_jump.png" id="3_ji4ad"]
 [ext_resource type="Script" path="res://scripts/fsm/StateMachine.gd" id="3_ntdkd"]
 [ext_resource type="Script" path="res://scripts/fsm/IdleState.gd" id="4_lpjgd"]
 [ext_resource type="Script" path="res://scripts/fsm/MoveState.gd" id="5_j58pb"]
 [ext_resource type="Script" path="res://scripts/DebugStateText.gd" id="6_0riig"]
 [ext_resource type="Script" path="res://scripts/fsm/AttackState.gd" id="6_ackvl"]
-[ext_resource type="PackedScene" uid="uid://tovnfix0unmi" path="res://prefab/Marker.tscn" id="8_nbng1"]
 [ext_resource type="Script" path="res://scripts/fsm/FollowState.gd" id="9_03g4x"]
 [ext_resource type="PackedScene" uid="uid://btnesc72tysik" path="res://prefab/Healthbar.tscn" id="10_uua1x"]
 [ext_resource type="Script" path="res://scripts/fsm/HealState.gd" id="10_wtoya"]
@@ -25,31 +22,6 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ks0ck"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_ehymy")
-}, {
-"duration": 2.0,
-"texture": ExtResource("3_ji4ad")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_um71p")
-}],
-"loop": true,
-"name": &"action",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_um71p")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_ywr4e"]
 radius = 40.0
 
@@ -60,7 +32,7 @@ script = ExtResource("1_73ntl")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_frhub")
-sprite_frames = SubResource("SpriteFrames_ks0ck")
+sprite_frames = ExtResource("2_heebf")
 animation = &"action"
 
 [node name="MousePickableArea" type="Area2D" parent="."]
@@ -78,7 +50,6 @@ script = ExtResource("4_lpjgd")
 
 [node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource("5_j58pb")
-marker = ExtResource("8_nbng1")
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_ackvl")

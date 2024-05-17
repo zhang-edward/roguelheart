@@ -2,8 +2,16 @@ extends Node2D
 
 const MIN_ENEMIES = 2
 const MAX_ENEMIES = 4
+const ENEMY_DATA = {
+	"health": 10,
+	"attack_power": 2,
+	"heal_power": 0,
+	"attack_speed": 0.5,
+	"move_speed": 50,
+}
 
 @export var enemy_scene: PackedScene
+
 var enemies: Array = []
 var player_party_manager: PlayerPartyManager
 
@@ -16,12 +24,12 @@ func _ready():
 	for i in range(num_enemies):
 		var enemy = enemy_scene.instantiate() as Enemy
 		add_child(enemy)
+		enemy.init(ENEMY_DATA)
 		enemy.set_attack_target(players.pick_random())
 		enemies.append(enemy)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
-	
 	var living_players = player_party_manager.players.filter(func(p: Player): return !p.is_dead())
 	
 	if living_players.size() > 0:

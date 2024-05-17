@@ -1,0 +1,30 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://dy772nuqdykra"]
+
+[ext_resource type="Texture2D" uid="uid://ck4dlos8gfevw" path="res://sprites/alienBeige.png" id="1_xmr3c"]
+[ext_resource type="Texture2D" uid="uid://coikxpubf6esv" path="res://sprites/spider.png" id="2_0gkn6"]
+[ext_resource type="Texture2D" uid="uid://chprwaf3to7mh" path="res://sprites/alienBeige_stand.png" id="3_gxy4g"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xmr3c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0gkn6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gxy4g")
+}],
+"loop": true,
+"name": &"action",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_gxy4g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

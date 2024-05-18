@@ -4,7 +4,7 @@ extends Node2D
 const MIN_ENEMIES = 2
 const MAX_ENEMIES = 4
 const ENEMY_DATA = {
-	"health": 10,
+	"health": 50,
 	"attack_power": 2,
 	"heal_power": 0,
 	"attack_speed": 0.5,

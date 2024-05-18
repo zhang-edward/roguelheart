@@ -1,11 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjbt5umbspxho"]
+[gd_scene load_steps=6 format=3 uid="uid://bjbt5umbspxho"]
 
 [ext_resource type="Script" path="res://scripts/LivesText.gd" id="1_8r2g4"]
 [ext_resource type="Script" path="res://scripts/PlayerPartyManager.gd" id="1_m5kpx"]
 [ext_resource type="PackedScene" uid="uid://d3tiuw84gdb1o" path="res://prefab/EnemyPartyManager.tscn" id="2_aye20"]
 [ext_resource type="PackedScene" uid="uid://uqjyppi50npj" path="res://prefab/Player.tscn" id="3_j4nkb"]
+[ext_resource type="Texture2D" path="res://sprites/bg.png" id="5_nv740"]
 
 [node name="Main" type="Node2D"]
+
+[node name="Bg" type="Sprite2D" parent="."]
+modulate = Color(0.588235, 0.588235, 0.588235, 1)
+z_index = -100
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(3, 3)
+texture = ExtResource("5_nv740")
 
 [node name="GUICanvasLayer" type="CanvasLayer" parent="."]
 

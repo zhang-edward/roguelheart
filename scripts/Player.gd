@@ -47,7 +47,7 @@ func init(config: Dictionary):
 func _process(_delta):
 	var _material = sprite.material as ShaderMaterial
 	if _player_party_manager.selected_player == self:
-		_material.set_shader_parameter('width', 5)
+		_material.set_shader_parameter('width', 1)
 		_material.set_shader_parameter('color', Color(0, 1.0, 0, 1))
 	else:
 		if !_is_hovering:
@@ -86,7 +86,7 @@ func is_selected() -> bool:
 func _on_mouse_pickable_area_mouse_shape_entered(_shape_idx):
 	_is_hovering = true
 	sprite.material.set_shader_parameter('color', Color(1, 0.855, 0, 1))
-	sprite.material.set_shader_parameter('width', 5)
+	sprite.material.set_shader_parameter('width', 1)
 
 func _on_mouse_pickable_area_mouse_shape_exited(_shape_idx):
 	_is_hovering = false

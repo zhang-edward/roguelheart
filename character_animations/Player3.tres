@@ -1,20 +1,50 @@
-[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://dy772nuqdykra"]
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://dy772nuqdykra"]
 
-[ext_resource type="Texture2D" uid="uid://ck4dlos8gfevw" path="res://sprites/alienBeige.png" id="1_xmr3c"]
-[ext_resource type="Texture2D" uid="uid://coikxpubf6esv" path="res://sprites/spider.png" id="2_0gkn6"]
-[ext_resource type="Texture2D" uid="uid://chprwaf3to7mh" path="res://sprites/alienBeige_stand.png" id="3_gxy4g"]
+[ext_resource type="Texture2D" uid="uid://bq5pv5tsg0msb" path="res://sprites/green-character.png" id="1_xylon"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_niy2n"]
+atlas = ExtResource("1_xylon")
+region = Rect2(160, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8k50c"]
+atlas = ExtResource("1_xylon")
+region = Rect2(200, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrtdw"]
+atlas = ExtResource("1_xylon")
+region = Rect2(240, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kyv4"]
+atlas = ExtResource("1_xylon")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bvh7"]
+atlas = ExtResource("1_xylon")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1t2y"]
+atlas = ExtResource("1_xylon")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocia6"]
+atlas = ExtResource("1_xylon")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ry6yx"]
+atlas = ExtResource("1_xylon")
+region = Rect2(0, 0, 40, 40)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_xmr3c")
+"texture": SubResource("AtlasTexture_niy2n")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_0gkn6")
+"texture": SubResource("AtlasTexture_8k50c")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_gxy4g")
+"texture": SubResource("AtlasTexture_nrtdw")
 }],
 "loop": true,
 "name": &"action",
@@ -22,9 +52,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_gxy4g")
+"texture": SubResource("AtlasTexture_4kyv4")
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bvh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1t2y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocia6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ry6yx")
+}],
+"loop": true,
+"name": &"move",
 "speed": 5.0
 }]

@@ -1,20 +1,50 @@
-[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://6rbgtgicdogl"]
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://6rbgtgicdogl"]
 
-[ext_resource type="Texture2D" uid="uid://ck4dlos8gfevw" path="res://sprites/alienBeige.png" id="1_xp2xj"]
-[ext_resource type="Texture2D" uid="uid://btaup5lhgnqr4" path="res://sprites/alienBeige_jump.png" id="2_sfb38"]
-[ext_resource type="Texture2D" uid="uid://chprwaf3to7mh" path="res://sprites/alienBeige_stand.png" id="3_jq0c2"]
+[ext_resource type="Texture2D" uid="uid://3n0dou6uwaea" path="res://sprites/red-character.png" id="1_ib17t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r556r"]
+atlas = ExtResource("1_ib17t")
+region = Rect2(160, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71jho"]
+atlas = ExtResource("1_ib17t")
+region = Rect2(200, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gyvs"]
+atlas = ExtResource("1_ib17t")
+region = Rect2(240, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78mm4"]
+atlas = ExtResource("1_ib17t")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xgtd"]
+atlas = ExtResource("1_ib17t")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pgfr"]
+atlas = ExtResource("1_ib17t")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2n34j"]
+atlas = ExtResource("1_ib17t")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aemee"]
+atlas = ExtResource("1_ib17t")
+region = Rect2(0, 0, 40, 40)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_xp2xj")
-}, {
-"duration": 2.0,
-"texture": ExtResource("2_sfb38")
+"texture": SubResource("AtlasTexture_r556r")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_jq0c2")
+"texture": SubResource("AtlasTexture_71jho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6gyvs")
 }],
 "loop": true,
 "name": &"action",
@@ -22,9 +52,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_jq0c2")
+"texture": SubResource("AtlasTexture_78mm4")
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xgtd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pgfr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2n34j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aemee")
+}],
+"loop": true,
+"name": &"move",
 "speed": 5.0
 }]

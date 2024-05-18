@@ -9,7 +9,6 @@
 [node name="Main" type="Node2D"]
 
 [node name="Bg" type="Sprite2D" parent="."]
-modulate = Color(0.588235, 0.588235, 0.588235, 1)
 z_index = -100
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(3, 3)

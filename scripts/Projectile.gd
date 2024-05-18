@@ -24,5 +24,5 @@ func _physics_process(_delta: float):
 	position = lerp(_start_position, _target.position, progress)
 
 	if progress >= 1:
-		_target.take_damage(_damage)
+		_target.take_damage(_damage, null)
 		queue_free()

@@ -66,7 +66,7 @@ func set_move_target(target: Vector2):
 	_state_machine.transition_to("Move", {"target": target})
 
 # TODO: Move this to an "abstract" base class
-func take_damage(amt: int) -> void:
+func take_damage(amt: int, _from) -> void:
 	_health -= amt
 	healthbar.value = _health
 	if _health <= 0:

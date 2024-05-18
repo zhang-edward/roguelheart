@@ -46,6 +46,6 @@ script = ExtResource("1_8r2g4")
 script = ExtResource("1_m5kpx")
 player_scene = ExtResource("1_uys3c")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="EnemyPartyManager" parent="." instance=ExtResource("2_aye20")]
+
+[node name="Camera2D" type="Camera2D" parent="."]

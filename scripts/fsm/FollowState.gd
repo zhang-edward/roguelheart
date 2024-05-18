@@ -10,7 +10,8 @@ var _approach_dir := Vector2.RIGHT
 var _line_to_dest: Line2D = null
 
 func _ready() -> void:
-	pass
+	if entity is Enemy:
+		entity.on_attacked.connect(on_attacked)
 	
 func physics_update(delta: float) -> void:
 	if _target == null or _target.is_dead():
@@ -23,7 +24,7 @@ func physics_update(delta: float) -> void:
 	if (entity.position - attack_target_pos).length() < MIN_ATTACK_DISTANCE:
 		state_machine.transition_to("Attack", {"target": _target})
 		
-	if entity is Player:	
+	if entity is Player:
 		entity.draw_line_to_target(_target)
 		entity.highlight_target(_target)
 
@@ -37,3 +38,10 @@ func exit() -> void:
 		target_enemy.remove_highlight()
 	if entity is Player:
 		entity.clear_line_to_target()
+
+func on_attacked(from: Player):
+	if from == null:
+		return
+	# Target entity with more health
+	if from._health > _target._health:
+		_target = from

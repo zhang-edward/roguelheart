@@ -10,7 +10,6 @@ var _target = null
 var _approach_dir := Vector2.RIGHT
 var _attack_anim_speed_factor: float
 var _projectile: PackedScene = preload ("res://prefab/Projectile.tscn")
-var _line_to_dest: Line2D = null
 
 func _ready() -> void:
 	sprite.frame_changed.connect(attack)
@@ -24,7 +23,7 @@ func physics_update(_delta: float) -> void:
 		return
 		
 	if entity is Player:
-		entity.draw_line_to_target(_target)
+		entity.draw_line_to_enemy(_target)
 
 func enter(msg:={}) -> void:
 	_target = msg.target
@@ -38,9 +37,10 @@ func enter(msg:={}) -> void:
 func exit() -> void:
 	if _target != null and _target is Enemy:
 		var target_enemy = _target as Enemy
-		target_enemy.remove_highlight()
+		if entity.is_selected():
+			target_enemy.remove_highlight()
 	if entity is Player:
-		entity.clear_line_to_target()
+		entity.clear_line_to_enemy()
 	sprite.stop()
 
 func attack() -> void:

@@ -10,7 +10,9 @@ func physics_update(delta: float) -> void:
 	if _target == null:
 		state_machine.transition_to("Idle")
 		return
-	entity.translate((_target - entity.position).normalized() * delta * entity.move_speed)
+	var dir = (_target - entity.position).normalized();
+	sprite.flip_h = dir.x < 0
+	entity.translate(dir * delta * entity.move_speed)
 	if (entity.position - _target).length() < 1:
 		state_machine.transition_to("Idle")
 	if marker != null:
@@ -18,7 +20,8 @@ func physics_update(delta: float) -> void:
 
 func enter(msg:={}) -> void:
 	_target = msg.target
-	
+	if sprite.sprite_frames.has_animation("move"):
+		sprite.play("move")
 	# Display a move target marker
 	if marker != null:
 		_curr_dest_marker = marker.instantiate() as Node

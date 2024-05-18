@@ -18,9 +18,10 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("Idle")
 		return
 	_approach_dir = Vector2.RIGHT if _target.position.x < entity.position.x else Vector2.LEFT
-
 	var attack_target_pos = _target.position + (_approach_dir * ATTACK_TARGET_OFFSET)
-	entity.translate((attack_target_pos - entity.position).normalized() * delta * entity.move_speed)
+	var dir = (attack_target_pos - entity.position).normalized()
+	sprite.flip_h = dir.x < 0
+	entity.translate(dir * delta * entity.move_speed)
 	if (entity.position - attack_target_pos).length() < MIN_ATTACK_DISTANCE:
 		state_machine.transition_to("Attack", {"target": _target})
 		
@@ -30,8 +31,9 @@ func physics_update(delta: float) -> void:
 
 func enter(msg:={}) -> void:
 	_target = msg.target
-	sprite.play("default")
-	
+	if sprite.sprite_frames.has_animation("move"):
+		sprite.play("move")
+
 func exit() -> void:
 	if _target != null and _target is Enemy:
 		var target_enemy = _target as Enemy

@@ -12,6 +12,7 @@ var _target = null
 var _approach_dir := Vector2.RIGHT
 var _attack_anim_speed_factor: float
 var _projectile: PackedScene = preload ("res://prefab/Projectile.tscn")
+var _line_to_dest: Line2D = null
 
 func _ready() -> void:
 	sprite.frame_changed.connect(attack)
@@ -22,11 +23,26 @@ func physics_update(_delta: float) -> void:
 	if _target == null or _target.is_dead():
 		state_machine.transition_to("Idle")
 		return
+		
+	if entity is Player:
+		entity.draw_line_to_target(_target)
 
 func enter(msg:={}) -> void:
 	_target = msg.target
 	_approach_dir = Vector2.RIGHT if msg.target.position.x < entity.position.x else Vector2.LEFT
 	sprite.play(ATTACK_ANIMATION_NAME, _attack_anim_speed_factor)
+	
+	# Highlight target if the current player is selected
+	if entity is Player:
+		entity.highlight_target(_target)
+		
+func exit() -> void:
+	if _target != null and _target is Enemy:
+		var target_enemy = _target as Enemy
+		target_enemy.remove_highlight()
+	if entity is Player:
+		entity.clear_line_to_target()
+	sprite.stop()
 
 func attack() -> void:
 	# TODO: make attack frame configurable instead of always being frame 1

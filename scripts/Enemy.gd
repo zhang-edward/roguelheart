@@ -3,7 +3,9 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 @onready var _state_machine: StateMachine = get_node("StateMachine")
-@onready var healthbar = get_node("Healthbar")
+@onready var healthbar: ProgressBar = get_node("Healthbar")
+@onready var sprite: AnimatedSprite2D = get_node("Sprite")
+
 var _health := 10
 
 func _ready():
@@ -28,6 +30,15 @@ func take_damage(amt: int) -> void:
 		queue_free()
 		visible = false
 		_state_machine.transition_to("Idle")
+		
+func highlight(color: Color):
+	var shader_material = sprite.material as ShaderMaterial
+	shader_material.set_shader_parameter('width', 5)
+	shader_material.set_shader_parameter('color', color)
+	
+func remove_highlight():
+	var shader_material = sprite.material as ShaderMaterial
+	shader_material.set_shader_parameter('width', 0)
 
 func is_dead() -> bool:
 	return _health <= 0

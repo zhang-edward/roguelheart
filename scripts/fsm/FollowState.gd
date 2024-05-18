@@ -7,7 +7,6 @@ var _target = null
 # If approaching target from the left, then attack offset position will be on the left
 # Otherwise, it will be on the right
 var _approach_dir := Vector2.RIGHT
-var _line_to_dest: Line2D = null
 
 func _ready() -> void:
 	if entity is Enemy:
@@ -26,7 +25,7 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("Attack", {"target": _target})
 		
 	if entity is Player:
-		entity.draw_line_to_target(_target)
+		entity.draw_line_to_enemy(_target)
 		entity.highlight_target(_target)
 
 func enter(msg:={}) -> void:
@@ -37,9 +36,10 @@ func enter(msg:={}) -> void:
 func exit() -> void:
 	if _target != null and _target is Enemy:
 		var target_enemy = _target as Enemy
-		target_enemy.remove_highlight()
+		if entity.is_selected():
+			target_enemy.remove_highlight()
 	if entity is Player:
-		entity.clear_line_to_target()
+		entity.clear_line_to_enemy()
 
 func on_attacked(from: Player):
 	if from == null:

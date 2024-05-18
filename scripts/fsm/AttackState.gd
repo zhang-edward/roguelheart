@@ -10,7 +10,6 @@ var _target = null
 # Otherwise, it will be on the right
 var _approach_dir := Vector2.RIGHT
 var _attack_anim_speed_factor: float
-var _line_to_dest: Line2D = null
 
 func _ready() -> void:
 	sprite.frame_changed.connect(attack)
@@ -38,7 +37,8 @@ func physics_update(_delta: float) -> void:
 func exit() -> void:
 	if _target != null and _target is Enemy:
 		var target_enemy = _target as Enemy
-		target_enemy.remove_highlight()
+		if entity.is_selected():
+			target_enemy.remove_highlight()
 
 func enter(msg:={}) -> void:
 	_target = msg.target
@@ -65,14 +65,6 @@ func get_animation_duration(sprite_frames: SpriteFrames, animation_name: StringN
 		var absolute_frame_duration = sprite_frames.get_frame_duration(animation_name, i) * frame_duration
 		anim_duration += absolute_frame_duration
 	return anim_duration
-
-func highlight_target():
-	var player = entity as Player
-	var target_enemy = _target as Enemy
-	if player.is_selected():
-		target_enemy.highlight(Color(1.0, 0, 0, 1.0))
-	else:
-		target_enemy.remove_highlight()
 
 func on_attacked(from: Player):
 	if from == null:

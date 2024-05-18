@@ -16,7 +16,7 @@ func physics_update(delta: float) -> void:
 	if (entity.position - _target).length() < 1:
 		state_machine.transition_to("Idle")
 	if marker != null:
-		drawLineToTarget()
+		draw_line_to_destination()
 
 func enter(msg:={}) -> void:
 	_target = msg.target
@@ -35,7 +35,7 @@ func exit() -> void:
 	if _line_to_dest != null:
 		_line_to_dest.queue_free()
 	
-func drawLineToTarget():
+func draw_line_to_destination():
 	if _line_to_dest == null:
 		_line_to_dest = Line2D.new()
 		add_child(_line_to_dest)

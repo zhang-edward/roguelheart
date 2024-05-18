@@ -18,11 +18,15 @@ func physics_update(_delta: float) -> void:
 	if _target == null or _target.is_dead():
 		state_machine.transition_to("Idle")
 		return
+	entity.draw_line_to_ally(_target)
 
 func enter(msg:={}) -> void:
 	_target = msg.target
 	_approach_dir = Vector2.RIGHT if msg.target.position.x < entity.position.x else Vector2.LEFT
 	sprite.play(ANIMATION_NAME, _attack_anim_speed_factor)
+	
+func exit() -> void:
+	entity.clear_line_to_ally()
 
 func attack() -> void:
 	# TODO: make attack frame configurable instead of always being frame 1

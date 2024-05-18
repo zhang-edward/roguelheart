@@ -15,7 +15,9 @@ enum UnitType {
 var _health: int = 50
 var _is_hovering: bool = false
 var _player_party_manager: PlayerPartyManager = null
-var _line_to_dest: Line2D = null
+var _line_to_enemy: Line2D = null
+var _line_to_ally: Line2D = null
+
 var attack_power: int = 5
 var heal_power: int = 10
 var attack_speed: int = 1
@@ -92,23 +94,36 @@ func _on_mouse_pickable_area_mouse_shape_exited(_shape_idx):
 	_is_hovering = false
 	
 func highlight_target(enemy: Enemy):
-	if is_selected():
-		enemy.highlight(Color(1.0, 0, 0, 1.0))
-	else:
-		enemy.remove_highlight()
+	enemy.highlight(Color(1.0, 0, 0, 1.0))
 	
-func clear_line_to_target():
-	if _line_to_dest != null:
-		_line_to_dest.queue_free()
+func clear_line_to_enemy():
+	if _line_to_enemy != null:
+		_line_to_enemy.queue_free()
+		
+func clear_line_to_ally():
+	if _line_to_ally != null:
+		_line_to_ally.queue_free()
 
-func draw_line_to_target(enemy: Enemy):
-	if _line_to_dest == null:
-		_line_to_dest = Line2D.new()
-		add_sibling(_line_to_dest)
-		_line_to_dest.z_index = self.z_index - 1
-		_line_to_dest.width = 10.0
-		_line_to_dest.default_color = Color(1, 0, 0, 1)
+func draw_line_to_enemy(enemy: Enemy):
+	if _line_to_enemy == null:
+		_line_to_enemy = draw_new_line(Color(1.0, 0, 0, 1.0))
 	else:
-		_line_to_dest.clear_points()
-	_line_to_dest.add_point(Vector2(position.x, position.y))
-	_line_to_dest.add_point(Vector2(enemy.position.x, enemy.position.y))
+		_line_to_enemy.clear_points()
+	_line_to_enemy.add_point(Vector2(position.x, position.y))
+	_line_to_enemy.add_point(Vector2(enemy.position.x, enemy.position.y))
+
+func draw_line_to_ally(player: Player):
+	if _line_to_ally == null:
+		_line_to_ally = draw_new_line(Color.DEEP_SKY_BLUE)
+	else:
+		_line_to_ally.clear_points()
+	_line_to_ally.add_point(Vector2(position.x, position.y))
+	_line_to_ally.add_point(Vector2(player.position.x, player.position.y))
+
+func draw_new_line(color: Color) -> Line2D:
+	var new_line = Line2D.new()
+	add_sibling(new_line)
+	new_line.z_index = self.z_index - 1
+	new_line.width = 10.0
+	new_line.default_color = color
+	return new_line

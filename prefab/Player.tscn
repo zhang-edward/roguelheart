@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/fsm/MoveState.gd" id="5_j58pb"]
 [ext_resource type="Script" path="res://scripts/DebugStateText.gd" id="6_0riig"]
 [ext_resource type="Script" path="res://scripts/fsm/AttackState.gd" id="6_ackvl"]
-[ext_resource type="PackedScene" uid="uid://tovnfix0unmi" path="res://prefab/Marker.tscn" id="7_xsuk4"]
+[ext_resource type="PackedScene" path="res://prefab/Marker.tscn" id="7_xsuk4"]
 [ext_resource type="Script" path="res://scripts/fsm/FollowState.gd" id="9_03g4x"]
 [ext_resource type="PackedScene" uid="uid://btnesc72tysik" path="res://prefab/Healthbar.tscn" id="10_uua1x"]
 [ext_resource type="Script" path="res://scripts/fsm/HealState.gd" id="10_wtoya"]
@@ -34,15 +34,15 @@ script = ExtResource("1_73ntl")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_frhub")
+position = Vector2(2.08165e-12, -40)
 scale = Vector2(3, 3)
 sprite_frames = ExtResource("2_heebf")
-animation = &"move"
-frame_progress = 0.403608
 
 [node name="MousePickableArea" type="Area2D" parent="."]
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MousePickableArea"]
+position = Vector2(2.08165e-12, -40)
 shape = SubResource("CapsuleShape2D_usn2e")
 
 [node name="StateMachine" type="Node" parent="."]
@@ -75,9 +75,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -100.0
-offset_top = -75.0
+offset_top = -115.0
 offset_right = 100.0
-offset_bottom = -35.0
+offset_bottom = -75.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(101, 17)
@@ -89,6 +89,10 @@ script = ExtResource("6_0riig")
 metadata/_edit_use_anchors_ = true
 
 [node name="Healthbar" parent="." instance=ExtResource("10_uua1x")]
+offset_left = -40.0
+offset_top = -120.0
+offset_right = 40.0
+offset_bottom = -114.0
 
 [connection signal="mouse_shape_entered" from="MousePickableArea" to="." method="_on_mouse_pickable_area_mouse_shape_entered"]
 [connection signal="mouse_shape_exited" from="MousePickableArea" to="." method="_on_mouse_pickable_area_mouse_shape_exited"]

@@ -49,7 +49,7 @@ func take_damage(amt: int, from) -> void:
 		
 func highlight(color: Color):
 	var shader_material = sprite.material as ShaderMaterial
-	shader_material.set_shader_parameter('width', 5)
+	shader_material.set_shader_parameter('width', 1)
 	shader_material.set_shader_parameter('color', color)
 	
 func remove_highlight():

@@ -24,13 +24,21 @@ func physics_update(_delta: float) -> void:
 	if _target == null or _target.is_dead():
 		state_machine.transition_to("Idle")
 		return
-
 	# Target has to be within MIN_ATTACK_DISTANCE to start attacking
 	var attack_target_pos = _target.position + (_approach_dir * ATTACK_TARGET_OFFSET)
 	# Target has to be outside MAX_ATTACK_DISTANCE to stop attacking
 	if (entity.position - attack_target_pos).length() > MAX_ATTACK_DISTANCE:
 		state_machine.transition_to("Follow", {"target": _target})
-	
+		
+	# Highlight target if the current player is selected
+	if entity is Player:
+		entity.highlight_target(_target)
+			
+func exit() -> void:
+	if _target != null and _target is Enemy:
+		var target_enemy = _target as Enemy
+		target_enemy.remove_highlight()
+		
 
 func enter(msg:={}) -> void:
 	_target = msg.target
@@ -57,3 +65,11 @@ func get_animation_duration(sprite_frames: SpriteFrames, animation_name: StringN
 		var absolute_frame_duration = sprite_frames.get_frame_duration(animation_name, i) * frame_duration
 		anim_duration += absolute_frame_duration
 	return anim_duration
+
+func highlight_target():
+	var player = entity as Player
+	var target_enemy = _target as Enemy
+	if player.is_selected():
+		target_enemy.highlight(Color(1.0, 0, 0, 1.0))
+	else:
+		target_enemy.remove_highlight()

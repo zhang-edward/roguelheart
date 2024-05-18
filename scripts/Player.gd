@@ -13,22 +13,34 @@ enum UnitType {
 @export var unit_type: UnitType = UnitType.MELEE
 
 var _health: int = 50
+var _is_hovering: bool = false
+var _player_party_manager: PlayerPartyManager = null
+var _line_to_dest: Line2D = null
 
 @onready var sprite: AnimatedSprite2D = get_node("Sprite")
 @onready var area: Area2D = get_node("MousePickableArea")
 @onready var _state_machine: StateMachine = get_node("StateMachine")
 @onready var healthbar: ProgressBar = get_node("Healthbar")
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var player_party_manager: PlayerPartyManager = get_node("/root/Main/PlayerPartyManager") as PlayerPartyManager
-	player_party_manager.add_player(self)
+	_player_party_manager = get_node("/root/Main/PlayerPartyManager") as PlayerPartyManager
+	_player_party_manager.add_player(self)
 	healthbar.value = _health
 	healthbar.max_value = _health
+	var material = sprite.material as ShaderMaterial
+	material.set_shader_parameter('width', 0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
+	var material = sprite.material as ShaderMaterial
+	if _player_party_manager.selected_player == self:
+		material.set_shader_parameter('width', 5)
+		material.set_shader_parameter('color', Color(0, 1.0, 0, 1))
+	else:
+		if !_is_hovering:
+			material.set_shader_parameter('width', 0)
 
 func set_attack_target(target: Node2D):
 	match unit_type:
@@ -56,3 +68,36 @@ func heal(amt: int) -> void:
 
 func is_dead() -> bool:
 	return _health <= 0
+	
+func is_selected() -> bool:
+	return _player_party_manager.selected_player == self
+
+func _on_mouse_pickable_area_mouse_shape_entered(shape_idx):
+	_is_hovering = true
+	sprite.material.set_shader_parameter('color', Color(1, 0.855, 0, 1))
+	sprite.material.set_shader_parameter('width', 5)
+
+func _on_mouse_pickable_area_mouse_shape_exited(shape_idx):
+	_is_hovering = false
+	
+func highlight_target(enemy: Enemy):
+	if is_selected():
+		enemy.highlight(Color(1.0, 0, 0, 1.0))
+	else:
+		enemy.remove_highlight()
+	
+func clear_line_to_target():
+	if _line_to_dest != null:
+		_line_to_dest.queue_free()
+
+func draw_line_to_target(enemy: Enemy):
+	if _line_to_dest == null:
+		_line_to_dest = Line2D.new()
+		add_sibling(_line_to_dest)
+		_line_to_dest.z_index = self.z_index - 1
+		_line_to_dest.width = 10.0
+		_line_to_dest.default_color = Color(1, 0, 0, 1)
+	else:
+		_line_to_dest.clear_points()
+	_line_to_dest.add_point(Vector2(position.x, position.y))
+	_line_to_dest.add_point(Vector2(enemy.position.x, enemy.position.y))

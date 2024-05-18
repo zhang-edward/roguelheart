@@ -23,17 +23,21 @@ func enter(msg:={}) -> void:
 	# Display a move target marker
 	if marker != null:
 		_curr_dest_marker = marker.instantiate() as Node
+		_curr_dest_marker.z_index = (entity as Player).z_index - 1
 		add_child(_curr_dest_marker)
 		_curr_dest_marker.position = Vector2(_target.x, _target.y)
 
 func exit() -> void:
-	_curr_dest_marker.queue_free()
-	_line_to_dest.queue_free()
+	if _curr_dest_marker != null:
+		_curr_dest_marker.queue_free()
+	if _line_to_dest != null:
+		_line_to_dest.queue_free()
 	
 func drawLineToTarget():
 	if _line_to_dest == null:
 		_line_to_dest = Line2D.new()
 		add_child(_line_to_dest)
+		_line_to_dest.z_index = (entity as Player).z_index - 1
 		_line_to_dest.width = 10.0
 		_line_to_dest.default_color = Color(0, 0.71, 0, 1)
 	else:

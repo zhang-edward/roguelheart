@@ -26,23 +26,16 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("Attack", {"target": _target})
 		
 	if entity is Player:	
-		draw_line_to_target()
+		entity.draw_line_to_target(_target)
+		entity.highlight_target(_target)
 
 func enter(msg:={}) -> void:
 	_target = msg.target
 	sprite.play("default")
 	
 func exit() -> void:
-	if _line_to_dest != null:
-		_line_to_dest.queue_free()
-	
-func draw_line_to_target():
-	if _line_to_dest == null:
-		_line_to_dest = Line2D.new()
-		add_child(_line_to_dest)
-		_line_to_dest.width = 10.0
-		_line_to_dest.default_color = Color(1, 0, 0, 1)
-	else:
-		_line_to_dest.clear_points()
-	_line_to_dest.add_point(Vector2(entity.position.x, entity.position.y))
-	_line_to_dest.add_point(Vector2(_target.position.x, _target.position.y))
+	if _target != null and _target is Enemy:
+		var target_enemy = _target as Enemy
+		target_enemy.remove_highlight()
+	if entity is Player:
+		entity.clear_line_to_target()

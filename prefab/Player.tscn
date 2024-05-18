@@ -21,9 +21,9 @@ shader_parameter/width = 3.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ywr4e"]
-radius = 40.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_usn2e"]
+radius = 30.0
+height = 100.0
 
 [node name="Player" type="Node2D"]
 position = Vector2(2.08165e-12, 2.08165e-12)
@@ -39,7 +39,7 @@ animation = &"action"
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MousePickableArea"]
-shape = SubResource("CircleShape2D_ywr4e")
+shape = SubResource("CapsuleShape2D_usn2e")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_ntdkd")

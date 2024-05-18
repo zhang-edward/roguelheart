@@ -1,3 +1,4 @@
+class_name EnemyPartyManager
 extends Node2D
 
 const MIN_ENEMIES = 2
@@ -12,7 +13,7 @@ const ENEMY_DATA = {
 
 @export var enemy_scene: PackedScene
 
-var enemies: Array = []
+static var enemies: Array = []
 var player_party_manager: PlayerPartyManager
 
 # Called when the node enters the scene tree for the first time.
@@ -27,6 +28,7 @@ func _ready():
 		enemy.init(ENEMY_DATA)
 		enemy.set_attack_target(players.pick_random())
 		enemies.append(enemy)
+		enemy.on_died.connect(on_enemy_died)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
@@ -49,3 +51,6 @@ func all_enemies_dead():
 		if !enemy.is_dead():
 			return false
 	return true
+
+func on_enemy_died(enemy: Enemy):
+	enemies.erase(enemy)

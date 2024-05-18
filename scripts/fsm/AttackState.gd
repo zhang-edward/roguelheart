@@ -17,6 +17,9 @@ func _ready() -> void:
 	var attack_anim_duration = get_animation_duration(sprite.sprite_frames, ATTACK_ANIMATION_NAME)
 	var attack_interval = 1 / entity.attack_speed
 	_attack_anim_speed_factor = attack_anim_duration / attack_interval
+	# Aggro behavior
+	if entity is Enemy:
+		entity.on_attacked.connect(on_attacked)
 	
 func physics_update(_delta: float) -> void:
 	if _target == null or _target.is_dead():
@@ -36,7 +39,6 @@ func exit() -> void:
 	if _target != null and _target is Enemy:
 		var target_enemy = _target as Enemy
 		target_enemy.remove_highlight()
-		
 
 func enter(msg:={}) -> void:
 	_target = msg.target
@@ -49,7 +51,7 @@ func attack() -> void:
 		return
 	var attack_target_pos = _target.position + (_approach_dir * ATTACK_TARGET_OFFSET)
 	if (entity.position - attack_target_pos).length() < MAX_ATTACK_DISTANCE:
-		_target.take_damage(entity.attack_power)
+		_target.take_damage(entity.attack_power, entity)
 
 # Gets the duration of an animation in seconds. Used to scale animation speed to explicitly set attack speed
 func get_animation_duration(sprite_frames: SpriteFrames, animation_name: StringName) -> float:
@@ -71,3 +73,10 @@ func highlight_target():
 		target_enemy.highlight(Color(1.0, 0, 0, 1.0))
 	else:
 		target_enemy.remove_highlight()
+
+func on_attacked(from: Player):
+	if from == null:
+		return
+	# Target entity with more health
+	if from._health > _target._health:
+		_target = from

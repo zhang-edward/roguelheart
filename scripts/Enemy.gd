@@ -1,6 +1,9 @@
 class_name Enemy
 extends Node2D
 
+signal on_died(enemy: Enemy)
+signal on_attacked(from: Player)
+
 # Called when the node enters the scene tree for the first time.
 @onready var _state_machine: StateMachine = get_node("StateMachine")
 @onready var healthbar: ProgressBar = get_node("Healthbar")
@@ -36,13 +39,13 @@ func set_attack_target(target: Node2D):
 func get_curr_state():
 	return _state_machine.state.name
 
-func take_damage(amt: int) -> void:
+func take_damage(amt: int, from) -> void:
+	on_attacked.emit(from)
 	_health -= amt
 	healthbar.value = _health
 	if _health <= 0:
 		queue_free()
-		visible = false
-		_state_machine.transition_to("Idle")
+		on_died.emit(self)
 		
 func highlight(color: Color):
 	var shader_material = sprite.material as ShaderMaterial

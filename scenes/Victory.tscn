@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://com6v7ik81s1"]
+
+[ext_resource type="Script" path="res://scripts/Scene.gd" id="1_4fcu6"]
+[ext_resource type="Script" path="res://scripts/power_up/PowerUpSelect.gd" id="2_5dxof"]
+[ext_resource type="PackedScene" uid="uid://bkvrgb2drocjs" path="res://prefab/PowerUpOption.tscn" id="3_1wbse"]
+[ext_resource type="Texture2D" uid="uid://e2l70clolq7a" path="res://sprites/bg.png" id="4_b14r3"]
+
+[node name="Victory" type="Node2D"]
+script = ExtResource("1_4fcu6")
+
+[node name="PowerUpSelect" type="Node" parent="."]
+script = ExtResource("2_5dxof")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="PowerUpSelect"]
+
+[node name="Control" type="Control" parent="PowerUpSelect/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PowerUpSelect/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="PowerUpOption" parent="PowerUpSelect/CanvasLayer/Control/HBoxContainer" instance=ExtResource("3_1wbse")]
+layout_mode = 2
+
+[node name="PowerUpOption2" parent="PowerUpSelect/CanvasLayer/Control/HBoxContainer" instance=ExtResource("3_1wbse")]
+layout_mode = 2
+
+[node name="PowerUpOption3" parent="PowerUpSelect/CanvasLayer/Control/HBoxContainer" instance=ExtResource("3_1wbse")]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PowerUpSelect/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 140.0
+offset_bottom = 182.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center]Choose a power up![/center]"
+fit_content = true
+
+[node name="Button" type="Button" parent="PowerUpSelect/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -123.5
+offset_top = -164.0
+offset_right = 123.5
+offset_bottom = -119.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Continue"
+
+[node name="Bg" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(3, 3)
+texture = ExtResource("4_b14r3")
+centered = false
+
+[connection signal="pressed" from="PowerUpSelect/CanvasLayer/Control/HBoxContainer/PowerUpOption3/Button" to="." method="_on_button_pressed"]
+
+[editable path="PowerUpSelect/CanvasLayer/Control/HBoxContainer/PowerUpOption"]
+[editable path="PowerUpSelect/CanvasLayer/Control/HBoxContainer/PowerUpOption2"]
+[editable path="PowerUpSelect/CanvasLayer/Control/HBoxContainer/PowerUpOption3"]

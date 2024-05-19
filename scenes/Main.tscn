@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjbt5umbspxho"]
+[gd_scene load_steps=7 format=3 uid="uid://bjbt5umbspxho"]
 
 [ext_resource type="Script" path="res://scripts/LivesText.gd" id="1_8r2g4"]
 [ext_resource type="Script" path="res://scripts/PlayerPartyManager.gd" id="1_m5kpx"]
 [ext_resource type="PackedScene" uid="uid://d3tiuw84gdb1o" path="res://prefab/EnemyPartyManager.tscn" id="2_aye20"]
 [ext_resource type="PackedScene" uid="uid://uqjyppi50npj" path="res://prefab/Player.tscn" id="3_j4nkb"]
 [ext_resource type="Texture2D" uid="uid://e2l70clolq7a" path="res://sprites/bg.png" id="5_nv740"]
+[ext_resource type="AudioStream" uid="uid://dravc1g3uulrn" path="res://music/Stream Loops 2024-03-06_02.ogg" id="6_fv6fu"]
 
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
@@ -62,3 +63,7 @@ entities_folder = NodePath("../Entities")
 entities_folder = NodePath("../Entities")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_fv6fu")
+autoplay = true

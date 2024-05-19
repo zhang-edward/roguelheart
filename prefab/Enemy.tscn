@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c8mt2vgagi8cc"]
+[gd_scene load_steps=24 format=3 uid="uid://c8mt2vgagi8cc"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_4cwpj"]
 [ext_resource type="Shader" path="res://shaders/Outline.gdshader" id="2_fkdhm"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/fsm/MoveState.gd" id="5_68pec"]
 [ext_resource type="Script" path="res://scripts/fsm/AttackState.gd" id="6_aaj38"]
 [ext_resource type="Script" path="res://scripts/fsm/FollowState.gd" id="8_htdkm"]
+[ext_resource type="AudioStream" uid="uid://cwf4pvxla28um" path="res://sfx/thornShield.wav" id="9_s3y45"]
 [ext_resource type="PackedScene" uid="uid://btnesc72tysik" path="res://prefab/Healthbar.tscn" id="9_xw6cj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbje5"]
@@ -97,6 +98,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_57dry"]
 size = Vector2(80, 50)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_c1n0k"]
+streams_count = 1
+random_pitch = 1.5
+stream_0/stream = ExtResource("9_s3y45")
+stream_0/weight = 1.0
+
 [node name="Enemy" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(2.08165e-12, 2.08165e-12)
@@ -135,6 +142,10 @@ script = ExtResource("5_68pec")
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_aaj38")
+attack_impact_sound = SubResource("AudioStreamRandomizer_c1n0k")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="StateMachine/Attack"]
+volume_db = -10.0
 
 [node name="Follow" type="Node" parent="StateMachine"]
 script = ExtResource("8_htdkm")

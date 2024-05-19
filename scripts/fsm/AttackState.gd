@@ -5,16 +5,21 @@ const ATTACK_ANIMATION_NAME = "action"
 const ATTACK_TARGET_OFFSET: float = 50
 const MAX_ATTACK_DISTANCE: float = 20
 
+@export var attack_impact_sound: AudioStreamRandomizer
+@export var attack_impact_frame: int = 1
+
 var _target = null
 # If approaching target from the left, then attack offset position will be on the left
 # Otherwise, it will be on the right
 var _approach_dir := Vector2.RIGHT
 var _attack_anim_speed_factor: float
 
+@onready var audio_stream_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 func _ready() -> void:
 	sprite.frame_changed.connect(attack)
 	var attack_anim_duration = get_animation_duration(sprite.sprite_frames, ATTACK_ANIMATION_NAME)
-	var attack_interval = 1 / entity.attack_speed
+	var attack_interval = 1.0 / entity.attack_speed
 	_attack_anim_speed_factor = attack_anim_duration / attack_interval
 	# Aggro behavior
 	if entity is Enemy:
@@ -48,12 +53,14 @@ func enter(msg:={}) -> void:
 	sprite.play(ATTACK_ANIMATION_NAME, _attack_anim_speed_factor)
 
 func attack() -> void:
-	# TODO: make attack frame configurable instead of always being frame 1
-	if _target == null or sprite.animation != ATTACK_ANIMATION_NAME or sprite.frame != 1:
+	if _target == null or sprite.animation != ATTACK_ANIMATION_NAME or sprite.frame != attack_impact_frame:
 		return
 	var attack_target_pos = _target.position + (_approach_dir * ATTACK_TARGET_OFFSET)
 	if (entity.position - attack_target_pos).length() < MAX_ATTACK_DISTANCE:
 		_target.take_damage(entity.attack_power, entity)
+		if audio_stream_player != null:
+			audio_stream_player.stream = attack_impact_sound
+			audio_stream_player.play()
 
 # Gets the duration of an animation in seconds. Used to scale animation speed to explicitly set attack speed
 func get_animation_duration(sprite_frames: SpriteFrames, animation_name: StringName) -> float:

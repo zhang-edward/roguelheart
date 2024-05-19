@@ -6,7 +6,7 @@ var party_data := [
 		"unit_type": Player.UnitType.MELEE,
 		"attack_power": 3,
 		"heal_power": 0,
-		"attack_speed": 2,
+		"attack_speed": 3000,
 		"move_speed": 100,
 		"sprite_frames_path": "res://character_animations/Player1.tres"
 	},

@@ -1,8 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bn0e5h4c7m8mf"]
+[gd_scene load_steps=3 format=3 uid="uid://bn0e5h4c7m8mf"]
 
 [ext_resource type="Script" path="res://scripts/ChangeSceneButton.gd" id="1_fpm2h"]
+[ext_resource type="Texture2D" uid="uid://e2l70clolq7a" path="res://sprites/bg.png" id="1_vhp5f"]
 
 [node name="GameOver" type="Node2D"]
+
+[node name="Bg" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(3, 3)
+texture = ExtResource("1_vhp5f")
+centered = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

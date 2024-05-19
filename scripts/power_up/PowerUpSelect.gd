@@ -1,5 +1,5 @@
 class_name PowerUpSelect
-extends Node2D
+extends Node
 
 enum PowerUpType {
 	PASSIVE,
@@ -34,19 +34,13 @@ var power_up_data := [
 		"passive_power_up_stat": PassivePowerUpStat.HP
 	},
 	{
-		"name": "Attack Speed Up",
-		"description": "Increase attack speed of all attacking units by 0.25",
-		"power_up_type": PowerUpType.PASSIVE,
-		"passive_power_up_stat": PassivePowerUpStat.ATTACK_SPEED
-	},
-	{
 		"name": "Movement Speed Up",
-		"description": "Increase movement speed of all units by 5",
+		"description": "Increase movement speed of all units by 10",
 		"power_up_type": PowerUpType.PASSIVE,
 		"passive_power_up_stat": PassivePowerUpStat.MOVEMENT_SPEED
 	}
 ]
-
+@onready var victory: Scene = $".."
 
 @onready var power_up_options: Array[PowerUpOption] = [
 	$CanvasLayer/Control/HBoxContainer/PowerUpOption,
@@ -70,5 +64,7 @@ func _process(delta):
 	pass
 
 func on_select_power_up(power_up_data: Dictionary):
-	print(power_up_data)
+	victory.level_data.power_ups.append(power_up_data)
+	victory.level_data.difficulty += 1
+	victory.switch_scene("Main")
 	pass

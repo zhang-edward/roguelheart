@@ -36,7 +36,7 @@ func _ready():
 	var _material = sprite.material as ShaderMaterial
 	_material.set_shader_parameter('width', 0)
 
-func init(config: Dictionary):
+func init(config: Dictionary, power_ups: Array):
 	_health = config.health
 	unit_type = config.unit_type
 	attack_power = config.attack_power
@@ -44,6 +44,23 @@ func init(config: Dictionary):
 	attack_speed = config.attack_speed
 	move_speed = config.move_speed
 	sprite.sprite_frames = load(config.sprite_frames_path)
+	apply_power_ups(power_ups)
+	
+func apply_power_ups(power_ups: Array):
+	for power_up in power_ups:
+		match power_up.passive_power_up_stat:
+			PowerUpSelect.PassivePowerUpStat.ATTACK_POWER:
+				attack_power += 1
+			PowerUpSelect.PassivePowerUpStat.HEAL_POWER:
+				heal_power += 1
+			PowerUpSelect.PassivePowerUpStat.MOVEMENT_SPEED:
+				move_speed += 10
+			PowerUpSelect.PassivePowerUpStat.HP:
+				_health += 5
+	print(_health)
+	print(attack_power)
+	print(heal_power)
+	print(move_speed)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -115,17 +132,27 @@ func draw_line_to_enemy(enemy: Enemy):
 	if _line_to_enemy == null:
 		_line_to_enemy = draw_new_line(Color(1.0, 0, 0, 1.0))
 	else:
-		_line_to_enemy.clear_points()
-	_line_to_enemy.add_point(Vector2(position.x, position.y))
-	_line_to_enemy.add_point(Vector2(enemy.position.x, enemy.position.y))
+		if is_dead():
+			_line_to_enemy.hide()
+		else:
+			_line_to_enemy.show()
+			_line_to_enemy.clear_points()
+			_line_to_enemy.add_point(Vector2(position.x, position.y))
+			_line_to_enemy.add_point(Vector2(enemy.position.x, enemy.position.y))
+
 
 func draw_line_to_ally(player: Player):
+
 	if _line_to_ally == null:
 		_line_to_ally = draw_new_line(Color.DEEP_SKY_BLUE)
 	else:
-		_line_to_ally.clear_points()
-	_line_to_ally.add_point(Vector2(position.x, position.y))
-	_line_to_ally.add_point(Vector2(player.position.x, player.position.y))
+		if is_dead():
+			_line_to_ally.hide()
+		else:
+			_line_to_ally.show()
+			_line_to_ally.clear_points()
+			_line_to_ally.add_point(Vector2(position.x, position.y))
+			_line_to_ally.add_point(Vector2(player.position.x, player.position.y))
 
 func draw_new_line(color: Color) -> Line2D:
 	var new_line = Line2D.new()

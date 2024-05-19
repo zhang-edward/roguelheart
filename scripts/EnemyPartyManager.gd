@@ -2,7 +2,6 @@ class_name EnemyPartyManager
 extends Node2D
 
 const MIN_ENEMIES = 2
-const MAX_ENEMIES = 4
 const ENEMY_DATA = {
 	"health": 50,
 	"attack_power": 2,
@@ -15,12 +14,14 @@ const ENEMY_DATA = {
 @export var entities_folder: NodePath
 @onready var gui: GUI = $"../GUICanvasLayer/GUI"
 @onready var player_party_manager: PlayerPartyManager = $"../PlayerPartyManager"
+@onready var main: Scene = $".."
 
 static var enemies: Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var num_enemies = randi_range(MIN_ENEMIES, MAX_ENEMIES)
+	var difficulty = main.level_data.difficulty
+	var num_enemies = MIN_ENEMIES + difficulty
 	var players = player_party_manager.players
 	var entities = get_node(entities_folder)
 	for i in range(num_enemies):

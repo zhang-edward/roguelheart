@@ -1,0 +1,190 @@
+[gd_scene load_steps=13 format=3 uid="uid://cek7k7yugu4ef"]
+
+[ext_resource type="Texture2D" uid="uid://e2l70clolq7a" path="res://sprites/bg.png" id="1_3f21k"]
+[ext_resource type="Texture2D" uid="uid://bla561mhk5u67" path="res://sprites/tile_0077.png" id="1_iq1mx"]
+[ext_resource type="Texture2D" uid="uid://bq5pv5tsg0msb" path="res://sprites/green-character.png" id="2_4y681"]
+[ext_resource type="Texture2D" uid="uid://qp5vd5q214ug" path="res://sprites/tile_0078.png" id="2_gmch4"]
+[ext_resource type="Texture2D" uid="uid://3n0dou6uwaea" path="res://sprites/red-character.png" id="3_vkwoo"]
+[ext_resource type="Texture2D" uid="uid://bharpj4hunshi" path="res://sprites/bug_enemy.png" id="5_42w8p"]
+[ext_resource type="Script" path="res://scenes/PlayButton.gd" id="7_pkb0c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uts5s"]
+atlas = ExtResource("3_vkwoo")
+region = Rect2(2.08165e-12, 2.08165e-12, 36, 32)
+margin = Rect2(2.08165e-12, 2.08165e-12, 4, 4)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g3vyh"]
+load_path = "res://.godot/imported/blue-character.png-0f21c06b231eaada191a63afa53ee765.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kr3ji"]
+atlas = SubResource("CompressedTexture2D_g3vyh")
+region = Rect2(2.08165e-12, 2.08165e-12, 36, 32)
+margin = Rect2(2.08165e-12, 2.08165e-12, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwxop"]
+atlas = ExtResource("2_4y681")
+region = Rect2(2.08165e-12, 2.08165e-12, 36, 32)
+margin = Rect2(2.08165e-12, 2.08165e-12, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nsxau"]
+atlas = ExtResource("5_42w8p")
+region = Rect2(2.08165e-12, 2.08165e-12, 36, 32)
+margin = Rect2(2.08165e-12, -8, 4, -8)
+
+[node name="Tutorial" type="Node2D"]
+
+[node name="Bg" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(3, 3)
+texture = ExtResource("1_3f21k")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI"]
+layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 66.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Headline" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "HOW TO PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Units" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 200)
+layout_mode = 2
+
+[node name="Headline2" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/Units"]
+layout_mode = 2
+text = "These are your units:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/Units"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/Units/HBoxContainer2"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/Units/HBoxContainer2/VBoxContainer3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_uts5s")
+expand_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/Units/HBoxContainer2/VBoxContainer3"]
+layout_mode = 2
+text = "Shieldbearer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/Units/HBoxContainer2"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/Units/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_kr3ji")
+expand_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/Units/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Gunner"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/Units/HBoxContainer2"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/Units/HBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_nwxop")
+expand_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/Units/HBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+text = "Medic"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Controls" type="HBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/Controls"]
+layout_mode = 2
+texture = ExtResource("1_iq1mx")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/Controls"]
+layout_mode = 2
+text = "Left click to select your unit                               "
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/Controls"]
+layout_mode = 2
+texture = ExtResource("2_gmch4")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label2" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/Controls"]
+layout_mode = 2
+text = "Right Click to give an order"
+
+[node name="VoidBug" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 200)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/VoidBug"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/VoidBug/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/VoidBug/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_nsxau")
+expand_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/VoidBug"]
+layout_mode = 2
+text = "Kill as many void bugs as possible!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/UI/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "LET'S GO!"
+script = ExtResource("7_pkb0c")
+
+[node name="Camera2D" type="Camera2D" parent="."]

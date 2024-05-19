@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/PlayerPartyManager.gd" id="1_m5kpx"]
 [ext_resource type="PackedScene" uid="uid://d3tiuw84gdb1o" path="res://prefab/EnemyPartyManager.tscn" id="2_aye20"]
 [ext_resource type="PackedScene" uid="uid://uqjyppi50npj" path="res://prefab/Player.tscn" id="3_j4nkb"]
-[ext_resource type="Texture2D" path="res://sprites/bg.png" id="5_nv740"]
+[ext_resource type="Texture2D" uid="uid://e2l70clolq7a" path="res://sprites/bg.png" id="5_nv740"]
 
 [node name="Main" type="Node2D"]
 y_sort_enabled = true

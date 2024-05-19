@@ -46,6 +46,9 @@ func take_damage(amt: int, from) -> void:
 	if _health <= 0:
 		queue_free()
 		on_died.emit(self)
+
+func aggro(from: Node2D):
+	on_attacked.emit(from)
 		
 func highlight(color: Color):
 	var shader_material = sprite.material as ShaderMaterial

@@ -75,6 +75,9 @@ func take_damage(amt: int, _from) -> void:
 		visible = false
 		_state_machine.transition_to("Idle")
 
+func aggro(_from: Node2D):
+	pass
+
 func heal(amt: int) -> void:
 	_health += amt
 	healthbar.value = _health

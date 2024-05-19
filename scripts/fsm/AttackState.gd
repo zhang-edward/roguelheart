@@ -43,6 +43,7 @@ func exit() -> void:
 
 func enter(msg:={}) -> void:
 	_target = msg.target
+	_target.aggro(entity)
 	_approach_dir = Vector2.RIGHT if msg.target.position.x < entity.position.x else Vector2.LEFT
 	sprite.play(ATTACK_ANIMATION_NAME, _attack_anim_speed_factor)
 

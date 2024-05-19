@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://uqjyppi50npj"]
+[gd_scene load_steps=24 format=3 uid="uid://uqjyppi50npj"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_73ntl"]
 [ext_resource type="SpriteFrames" uid="uid://baupxywflmfm4" path="res://character_animations/Player2.tres" id="2_heebf"]
@@ -11,9 +11,13 @@
 [ext_resource type="Script" path="res://scripts/fsm/AttackState.gd" id="6_ackvl"]
 [ext_resource type="PackedScene" path="res://prefab/Marker.tscn" id="7_xsuk4"]
 [ext_resource type="Script" path="res://scripts/fsm/FollowState.gd" id="9_03g4x"]
+[ext_resource type="AudioStream" uid="uid://bb8nu416vnqnh" path="res://sfx/Slam1.wav" id="10_r80l1"]
 [ext_resource type="PackedScene" uid="uid://btnesc72tysik" path="res://prefab/Healthbar.tscn" id="10_uua1x"]
 [ext_resource type="Script" path="res://scripts/fsm/HealState.gd" id="10_wtoya"]
 [ext_resource type="Script" path="res://scripts/fsm/RangeAttackState.gd" id="11_88pcu"]
+[ext_resource type="AudioStream" uid="uid://dweoxrblsae68" path="res://sfx/Slam2.wav" id="11_q15ph"]
+[ext_resource type="AudioStream" uid="uid://b2veyb6lj0xn4" path="res://sfx/Short_PowerUp_005.wav" id="14_x1uun"]
+[ext_resource type="AudioStream" uid="uid://ban22qvr5t13g" path="res://sfx/MP5 9mm - FIRING - Large Hall - Bursts - 1m Side - MKH8060.wav" id="15_mu06v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_frhub"]
 resource_local_to_scene = true
@@ -27,6 +31,24 @@ shader_parameter/add_margins = true
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_usn2e"]
 radius = 30.0
 height = 100.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_elr5r"]
+streams_count = 2
+random_pitch = 1.5
+stream_0/stream = ExtResource("10_r80l1")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("11_q15ph")
+stream_1/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6qjf5"]
+streams_count = 1
+stream_0/stream = ExtResource("14_x1uun")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5c6nu"]
+streams_count = 1
+stream_0/stream = ExtResource("15_mu06v")
+stream_0/weight = 1.0
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_73ntl")
@@ -65,15 +87,28 @@ marker = ExtResource("7_xsuk4")
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_ackvl")
+attack_impact_sound = SubResource("AudioStreamRandomizer_elr5r")
+attack_impact_frame = 2
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="StateMachine/Attack"]
+volume_db = -10.0
 
 [node name="Follow" type="Node" parent="StateMachine"]
 script = ExtResource("9_03g4x")
 
 [node name="Heal" type="Node" parent="StateMachine"]
 script = ExtResource("10_wtoya")
+attack_impact_sound = SubResource("AudioStreamRandomizer_6qjf5")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="StateMachine/Heal"]
+volume_db = -10.0
 
 [node name="RangeAttack" type="Node" parent="StateMachine"]
 script = ExtResource("11_88pcu")
+attack_impact_sound = SubResource("AudioStreamRandomizer_5c6nu")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="StateMachine/RangeAttack"]
+volume_db = -10.0
 
 [node name="DebugStateText" type="RichTextLabel" parent="."]
 anchors_preset = 7

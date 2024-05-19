@@ -2,11 +2,15 @@ extends State
 
 const ANIMATION_NAME = "action"
 
+@export var attack_impact_sound: AudioStreamRandomizer
+
 var _target = null
 # If approaching target from the left, then attack offset position will be on the left
 # Otherwise, it will be on the right
 var _approach_dir := Vector2.RIGHT
 var _attack_anim_speed_factor: float
+
+@onready var audio_stream_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 func _ready() -> void:
 	sprite.frame_changed.connect(attack)
@@ -35,6 +39,9 @@ func attack() -> void:
 	if _target == null or sprite.animation != ANIMATION_NAME or sprite.frame != 1:
 		return
 	_target.heal(entity.heal_power)
+	if audio_stream_player != null:
+		audio_stream_player.stream = attack_impact_sound
+		audio_stream_player.play()
 
 # Gets the duration of an animation in seconds. Used to scale animation speed to explicitly set attack speed
 func get_animation_duration(sprite_frames: SpriteFrames, animation_name: StringName) -> float:

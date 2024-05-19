@@ -1,5 +1,6 @@
 extends State
 
+@export var attack_impact_sound: AudioStreamRandomizer
 @export var projectile_travel_speed = 500
 
 const ATTACK_ANIMATION_NAME = "action"
@@ -10,6 +11,8 @@ var _target = null
 var _approach_dir := Vector2.RIGHT
 var _attack_anim_speed_factor: float
 var _projectile: PackedScene = preload ("res://prefab/Projectile.tscn")
+
+@onready var audio_stream_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 func _ready() -> void:
 	sprite.frame_changed.connect(attack)
@@ -48,8 +51,12 @@ func exit() -> void:
 
 func attack() -> void:
 	# TODO: make attack frame configurable instead of always being frame 1
-	if _target == null or sprite.animation != ATTACK_ANIMATION_NAME or sprite.frame != 1:
+	if _target == null or sprite.animation != ATTACK_ANIMATION_NAME or sprite.frame != 2:
 		return
+
+	if audio_stream_player != null:
+		audio_stream_player.stream = attack_impact_sound
+		audio_stream_player.play()
 
 	# Create projectile travel timer
 	var projectile_travel_time = entity.position.distance_to(_target.position) / projectile_travel_speed

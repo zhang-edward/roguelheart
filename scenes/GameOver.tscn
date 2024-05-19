@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bn0e5h4c7m8mf"]
+[gd_scene load_steps=4 format=3 uid="uid://bn0e5h4c7m8mf"]
 
+[ext_resource type="Script" path="res://scripts/Scene.gd" id="1_4cgmh"]
 [ext_resource type="Script" path="res://scripts/ChangeSceneButton.gd" id="1_fpm2h"]
 [ext_resource type="Texture2D" uid="uid://e2l70clolq7a" path="res://sprites/bg.png" id="1_vhp5f"]
 
 [node name="GameOver" type="Node2D"]
+script = ExtResource("1_4cgmh")
 
 [node name="Bg" type="Sprite2D" parent="."]
 z_index = -100
@@ -55,7 +57,9 @@ bbcode_enabled = true
 text = "[center][rainbow freq=0.2][wave] You lose![/wave][/rainbow][/center]"
 fit_content = true
 
-[node name="Button" type="Button" parent="CanvasLayer/UI/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="CanvasLayer/UI/PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("scene")]
 layout_mode = 2
 text = "Restart"
 script = ExtResource("1_fpm2h")
+level_name = "Title"
+scene = NodePath("../../../../../..")

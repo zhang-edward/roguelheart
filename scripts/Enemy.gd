@@ -28,7 +28,7 @@ func init(config: Dictionary):
 	healthbar.value = config.health
 	healthbar.max_value = config.health
 	_health = config.health
-	attack_power = config.attack_power
+	attack_power = config.attack_power * 100
 	heal_power = config.heal_power
 	attack_speed = config.attack_speed
 	move_speed = config.move_speed

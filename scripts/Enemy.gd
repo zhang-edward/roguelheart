@@ -17,10 +17,12 @@ var move_speed: int = 100
 
 func _ready():
 	var screen_size = get_viewport().get_visible_rect().size
-	var x = randi_range( - screen_size.x / 2, screen_size.x / 2)
-	var y = randi_range( - screen_size.y / 2, screen_size.y / 2) + 120
+	var spawn_sides = [-screen_size.x / 2, screen_size.x / 2]
+	var x = spawn_sides[randi_range(0, spawn_sides.size() - 1)]
+	var y = randi_range(-screen_size.y / 2, screen_size.y / 2) + 120
 	
 	position = Vector2(x, y)
+	print(position)
 	
 func init(config: Dictionary):
 	healthbar.value = config.health

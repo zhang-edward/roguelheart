@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bn0e5h4c7m8mf"]
 
-[ext_resource type="Script" path="res://scripts/RestartButton.gd" id="1_2by4p"]
+[ext_resource type="Script" path="res://scripts/ChangeSceneButton.gd" id="1_fpm2h"]
 
 [node name="GameOver" type="Node2D"]
 
@@ -50,4 +50,4 @@ fit_content = true
 [node name="Button" type="Button" parent="CanvasLayer/UI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Restart"
-script = ExtResource("1_2by4p")
+script = ExtResource("1_fpm2h")

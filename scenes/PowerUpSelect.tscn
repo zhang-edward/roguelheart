@@ -1,10 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0y5x1yrvv1wx"]
+[gd_scene load_steps=4 format=3 uid="uid://b0y5x1yrvv1wx"]
 
 [ext_resource type="Script" path="res://scripts/power_up/PowerUpSelect.gd" id="1_y83kq"]
 [ext_resource type="PackedScene" uid="uid://bkvrgb2drocjs" path="res://prefab/PowerUpOption.tscn" id="2_b7kof"]
+[ext_resource type="Texture2D" uid="uid://e2l70clolq7a" path="res://sprites/bg.png" id="2_glxc4"]
 
 [node name="PowerUpSelect" type="Node2D"]
 script = ExtResource("1_y83kq")
+
+[node name="Bg" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(3, 3)
+texture = ExtResource("2_glxc4")
+centered = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

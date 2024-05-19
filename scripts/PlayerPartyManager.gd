@@ -8,9 +8,11 @@ and the currently selected player, and manages giving orders
 
 @export var player_scene: PackedScene
 @export var entities_folder: NodePath
+@onready var main = $".."
 
 var selected_player: Player = null
 var players: Array = []
+var is_switching_scene: bool = false
 
 @onready var player_variables: PlayerVariables = get_node("/root/PlayerVariables")
 
@@ -30,12 +32,9 @@ func add_player(player: Player):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if all_players_dead():
-		if player_variables.lives > 0:
-			player_variables.lives -= 1
-			get_tree().reload_current_scene()
-		else:
-			get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
+	if all_players_dead() and !is_switching_scene:
+		is_switching_scene = true
+		main.switch_scene("GameOver")
 
 	for player in players:
 		if player != selected_player:

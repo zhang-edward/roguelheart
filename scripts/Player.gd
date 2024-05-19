@@ -14,9 +14,9 @@ enum UnitType {
 
 var _health: int = 50
 var _is_hovering: bool = false
-var _player_party_manager: PlayerPartyManager = null
 var _line_to_enemy: Line2D = null
 var _line_to_ally: Line2D = null
+var _player_party_manager: PlayerPartyManager = null
 
 var attack_power: int = 5
 var heal_power: int = 10
@@ -30,7 +30,7 @@ var move_speed: int = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_player_party_manager = get_node("/root/Main/PlayerPartyManager") as PlayerPartyManager
+	_player_party_manager = get_node("/root/SceneSwitcher/Main/PlayerPartyManager") as PlayerPartyManager
 	healthbar.value = _health
 	healthbar.max_value = _health
 	var _material = sprite.material as ShaderMaterial

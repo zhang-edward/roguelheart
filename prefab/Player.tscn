@@ -1,8 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://uqjyppi50npj"]
+[gd_scene load_steps=17 format=3 uid="uid://uqjyppi50npj"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_73ntl"]
 [ext_resource type="SpriteFrames" uid="uid://baupxywflmfm4" path="res://character_animations/Player2.tres" id="2_heebf"]
-[ext_resource type="Texture2D" uid="uid://ce244boxnmkti" path="res://sprites/dropshadow.png" id="2_ip4b0"]
+[ext_resource type="Texture2D" path="res://sprites/dropshadow.png" id="2_ip4b0"]
 [ext_resource type="Shader" path="res://shaders/Outline.gdshader" id="2_t2jas"]
 [ext_resource type="Script" path="res://scripts/fsm/StateMachine.gd" id="3_ntdkd"]
 [ext_resource type="Script" path="res://scripts/fsm/IdleState.gd" id="4_lpjgd"]

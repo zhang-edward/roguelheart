@@ -12,6 +12,7 @@ const ENEMY_DATA = {
 }
 
 @export var enemy_scene: PackedScene
+@export var entities_folder: NodePath
 
 static var enemies: Array = []
 var player_party_manager: PlayerPartyManager
@@ -22,9 +23,10 @@ func _ready():
 	
 	player_party_manager = get_node("/root/Main/PlayerPartyManager") as PlayerPartyManager
 	var players = player_party_manager.players
+	var entities = get_node(entities_folder)
 	for i in range(num_enemies):
 		var enemy = enemy_scene.instantiate() as Enemy
-		add_child(enemy)
+		entities.add_child(enemy)
 		enemy.init(ENEMY_DATA)
 		enemy.set_attack_target(players.pick_random())
 		enemies.append(enemy)

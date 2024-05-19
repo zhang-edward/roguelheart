@@ -21,10 +21,10 @@ func _ready():
 	var y = randi_range( - screen_size.y / 2, screen_size.y / 2)
 	
 	position = Vector2(x, y)
-	healthbar.value = _health
-	healthbar.max_value = _health
 	
 func init(config: Dictionary):
+	healthbar.value = config.health
+	healthbar.max_value = config.health
 	_health = config.health
 	attack_power = config.attack_power
 	heal_power = config.heal_power

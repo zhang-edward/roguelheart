@@ -1,8 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://c8mt2vgagi8cc"]
+[gd_scene load_steps=22 format=3 uid="uid://c8mt2vgagi8cc"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_4cwpj"]
 [ext_resource type="Shader" path="res://shaders/Outline.gdshader" id="2_fkdhm"]
-[ext_resource type="Texture2D" uid="uid://ce244boxnmkti" path="res://sprites/dropshadow.png" id="2_reymy"]
+[ext_resource type="Texture2D" path="res://sprites/dropshadow.png" id="2_reymy"]
 [ext_resource type="Script" path="res://scripts/fsm/StateMachine.gd" id="3_5m8em"]
 [ext_resource type="Texture2D" uid="uid://bharpj4hunshi" path="res://sprites/bug_enemy.png" id="3_tlchc"]
 [ext_resource type="Script" path="res://scripts/fsm/IdleState.gd" id="4_5qyw5"]
@@ -98,20 +98,20 @@ animations = [{
 size = Vector2(80, 50)
 
 [node name="Enemy" type="Node2D"]
+y_sort_enabled = true
 position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_4cwpj")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.392157)
 z_index = -50
-position = Vector2(2.08165e-12, 5)
+position = Vector2(-2.08165e-12, -2.08165e-12)
 scale = Vector2(2.5, 3)
 texture = ExtResource("2_reymy")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-y_sort_enabled = true
 material = SubResource("ShaderMaterial_jbje5")
-position = Vector2(2.08165e-12, -20)
+position = Vector2(2.08165e-12, -25)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_ubdcv")
 animation = &"move"

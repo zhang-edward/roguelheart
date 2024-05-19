@@ -7,12 +7,16 @@
 [ext_resource type="Texture2D" path="res://sprites/bg.png" id="5_nv740"]
 
 [node name="Main" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Bg" type="Sprite2D" parent="."]
 z_index = -100
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(3, 3)
 texture = ExtResource("5_nv740")
+
+[node name="Entities" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="GUICanvasLayer" type="CanvasLayer" parent="."]
 
@@ -52,7 +56,9 @@ script = ExtResource("1_8r2g4")
 [node name="PlayerPartyManager" type="Node2D" parent="."]
 script = ExtResource("1_m5kpx")
 player_scene = ExtResource("3_j4nkb")
+entities_folder = NodePath("../Entities")
 
 [node name="EnemyPartyManager" parent="." instance=ExtResource("2_aye20")]
+entities_folder = NodePath("../Entities")
 
 [node name="Camera2D" type="Camera2D" parent="."]

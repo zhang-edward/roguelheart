@@ -26,6 +26,7 @@ func physics_update(_delta: float) -> void:
 		return
 	# Target has to be within MIN_ATTACK_DISTANCE to start attacking
 	var attack_target_pos = _target.position + (_approach_dir * ATTACK_TARGET_OFFSET)
+	sprite.flip_h = _approach_dir.x > 0
 	# Target has to be outside MAX_ATTACK_DISTANCE to stop attacking
 	if (entity.position - attack_target_pos).length() > MAX_ATTACK_DISTANCE:
 		state_machine.transition_to("Follow", {"target": _target})

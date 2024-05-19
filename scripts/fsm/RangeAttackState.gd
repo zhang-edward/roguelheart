@@ -21,6 +21,9 @@ func physics_update(_delta: float) -> void:
 	if _target == null or _target.is_dead():
 		state_machine.transition_to("Idle")
 		return
+
+	var dir = (_target.position - entity.position).normalized();
+	sprite.flip_h = dir.x < 0
 		
 	if entity is Player:
 		entity.draw_line_to_enemy(_target)

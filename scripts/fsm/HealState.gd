@@ -19,6 +19,8 @@ func physics_update(_delta: float) -> void:
 		state_machine.transition_to("Idle")
 		return
 	entity.draw_line_to_ally(_target)
+	var dir = (_target.position - entity.position).normalized();
+	sprite.flip_h = dir.x < 0
 
 func enter(msg:={}) -> void:
 	_target = msg.target

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://uqjyppi50npj"]
+[gd_scene load_steps=28 format=3 uid="uid://uqjyppi50npj"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_73ntl"]
 [ext_resource type="SpriteFrames" uid="uid://baupxywflmfm4" path="res://character_animations/Player2.tres" id="2_heebf"]
@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://dweoxrblsae68" path="res://sfx/Slam2.wav" id="11_q15ph"]
 [ext_resource type="AudioStream" uid="uid://b2veyb6lj0xn4" path="res://sfx/Short_PowerUp_005.wav" id="14_x1uun"]
 [ext_resource type="AudioStream" uid="uid://ban22qvr5t13g" path="res://sfx/MP5 9mm - FIRING - Large Hall - Bursts - 1m Side - MKH8060.wav" id="15_mu06v"]
+[ext_resource type="Texture2D" uid="uid://djmn4yrn4mtvh" path="res://sprites/heal_particle.png" id="19_papdi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_frhub"]
 resource_local_to_scene = true
@@ -49,6 +50,17 @@ stream_0/weight = 1.0
 streams_count = 1
 stream_0/stream = ExtResource("15_mu06v")
 stream_0/weight = 1.0
+
+[sub_resource type="Curve" id="Curve_qj0kk"]
+max_value = 2.0
+_data = [Vector2(0, 1.04235), 0.0, -0.0682479, 0, 0, Vector2(1, 2), 4.7657, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_apkep"]
+colors = PackedColorArray(1, 0, 0, 1, 0.490196, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_0iscg"]
+colors = PackedColorArray(0.0509804, 1, 0.0666667, 1, 0.0784314, 0.760784, 0, 0.235294)
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_73ntl")
@@ -111,6 +123,7 @@ attack_impact_sound = SubResource("AudioStreamRandomizer_5c6nu")
 volume_db = -10.0
 
 [node name="DebugStateText" type="RichTextLabel" parent="."]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -132,9 +145,50 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Healthbar" parent="." instance=ExtResource("10_uua1x")]
 offset_left = -40.0
-offset_top = -120.0
+offset_top = -100.0
 offset_right = 40.0
-offset_bottom = -114.0
+offset_bottom = -94.0
+
+[node name="BloodParticles" type="CPUParticles2D" parent="."]
+position = Vector2(2.08165e-12, -25)
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.79
+emission_shape = 3
+emission_rect_extents = Vector2(20, 20)
+direction = Vector2(2.08165e-12, -1)
+spread = 85.9
+gravity = Vector2(2.08165e-12, 500)
+initial_velocity_min = 50.0
+initial_velocity_max = 200.0
+scale_amount_min = 2.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_qj0kk")
+color = Color(1, 0.592157, 0.258824, 1)
+color_initial_ramp = SubResource("Gradient_apkep")
+
+[node name="HealParticles" type="CPUParticles2D" parent="."]
+position = Vector2(2.08165e-12, -25)
+emitting = false
+amount = 5
+lifetime = 0.75
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.79
+texture = ExtResource("19_papdi")
+emission_shape = 3
+emission_rect_extents = Vector2(40, 40)
+direction = Vector2(2.08165e-12, -1)
+spread = 85.9
+gravity = Vector2(2.08165e-12, -200)
+initial_velocity_max = 50.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+color = Color(1, 0.592157, 0.258824, 1)
+color_initial_ramp = SubResource("Gradient_0iscg")
 
 [connection signal="mouse_shape_entered" from="MousePickableArea" to="." method="_on_mouse_pickable_area_mouse_shape_entered"]
 [connection signal="mouse_shape_exited" from="MousePickableArea" to="." method="_on_mouse_pickable_area_mouse_shape_exited"]

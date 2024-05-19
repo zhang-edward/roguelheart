@@ -40,6 +40,8 @@ func get_curr_state():
 	return _state_machine.state.name
 
 func take_damage(amt: int, from) -> void:
+	$BloodParticles.restart()
+	$BloodParticles.emitting = true
 	on_attacked.emit(from)
 	_health -= amt
 	healthbar.value = _health

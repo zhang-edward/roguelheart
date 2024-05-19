@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c8mt2vgagi8cc"]
+[gd_scene load_steps=26 format=3 uid="uid://c8mt2vgagi8cc"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_4cwpj"]
 [ext_resource type="Shader" path="res://shaders/Outline.gdshader" id="2_fkdhm"]
@@ -104,6 +104,13 @@ random_pitch = 1.5
 stream_0/stream = ExtResource("9_s3y45")
 stream_0/weight = 1.0
 
+[sub_resource type="Curve" id="Curve_7tfs6"]
+_data = [Vector2(0, 1), 0.0, -0.883109, 0, 0, Vector2(1, 0.0659), -3.67997, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_5pkvd"]
+colors = PackedColorArray(0, 0.612035, 0.617746, 1, 2.95438e-07, 0.28462, 0.416954, 1)
+
 [node name="Enemy" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(2.08165e-12, 2.08165e-12)
@@ -153,3 +160,23 @@ script = ExtResource("8_htdkm")
 [node name="Healthbar" parent="." instance=ExtResource("9_xw6cj")]
 offset_top = -60.0
 offset_bottom = -54.0
+
+[node name="BloodParticles" type="CPUParticles2D" parent="."]
+position = Vector2(2.08165e-12, -25)
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.79
+emission_shape = 3
+emission_rect_extents = Vector2(20, 20)
+direction = Vector2(2.08165e-12, -1)
+spread = 85.9
+gravity = Vector2(2.08165e-12, 500)
+initial_velocity_min = 50.0
+initial_velocity_max = 200.0
+scale_amount_min = 2.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_7tfs6")
+color_initial_ramp = SubResource("Gradient_5pkvd")

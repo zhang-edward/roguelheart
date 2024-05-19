@@ -126,4 +126,6 @@ func draw_new_line(color: Color) -> Line2D:
 	new_line.z_index = self.z_index - 1
 	new_line.width = 10.0
 	new_line.default_color = color
+	new_line.end_cap_mode = Line2D.LINE_CAP_ROUND
+	new_line.begin_cap_mode = Line2D.LINE_CAP_ROUND
 	return new_line

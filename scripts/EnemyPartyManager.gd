@@ -13,6 +13,7 @@ const ENEMY_DATA = {
 
 @export var enemy_scene: PackedScene
 @export var entities_folder: NodePath
+@onready var gui: GUI = get_node("/root/Main/GUICanvasLayer") as GUI
 
 static var enemies: Array = []
 var player_party_manager: PlayerPartyManager
@@ -44,7 +45,8 @@ func _process(_delta: float):
 				enemy.set_attack_target(living_players.pick_random())
 
 	if all_enemies_dead():
-		get_tree().reload_current_scene()
+		gui.display_victory()
+		
 
 func all_enemies_dead():
 	for enemy in enemies:

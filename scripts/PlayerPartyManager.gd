@@ -8,7 +8,7 @@ and the currently selected player, and manages giving orders
 
 @export var player_scene: PackedScene
 @export var entities_folder: NodePath
-@onready var main = $".."
+@onready var main: Scene = $".."
 
 var selected_player: Player = null
 var players: Array = []
@@ -24,7 +24,8 @@ func _ready():
 		var new_player = player_scene.instantiate()
 		new_player.position = Vector2(i * 100 - 100, 0)
 		entities.add_child(new_player)
-		new_player.init(player_data)
+		print(main.level_data.power_ups)
+		new_player.init(player_data, main.level_data.power_ups)
 		add_player(new_player)
 
 func add_player(player: Player):
@@ -34,6 +35,10 @@ func add_player(player: Player):
 func _process(_delta):
 	if all_players_dead() and !is_switching_scene:
 		is_switching_scene = true
+		
+		# Reset progression
+		main.level_data.power_ups = []
+		main.level_data.difficulty = 0
 		main.switch_scene("GameOver")
 
 	for player in players:

@@ -14,15 +14,15 @@ func handle_level_changed(next_level_name: String):
 	animation_player.play("transition_fade_in")
 	
 func transfer_data(old_scene, new_scene):
-	pass
+	new_scene.level_data = old_scene.level_data
 
 func _on_animation_player_animation_finished(anim_name):
 	match anim_name:
 		"transition_fade_in":
+			transfer_data(curr_level, next_level)
 			next_level.hide()
 			add_child(next_level)
 			next_level.connect("level_changed", handle_level_changed)
-			
 			curr_level.queue_free()
 			curr_level = next_level
 			curr_level.show()

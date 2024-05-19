@@ -13,16 +13,14 @@ const ENEMY_DATA = {
 
 @export var enemy_scene: PackedScene
 @export var entities_folder: NodePath
-@onready var gui: GUI = get_node("/root/Main/GUICanvasLayer") as GUI
+@onready var gui: GUI = $"../GUICanvasLayer/GUI"
+@onready var player_party_manager: PlayerPartyManager = $"../PlayerPartyManager"
 
 static var enemies: Array = []
-var player_party_manager: PlayerPartyManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var num_enemies = randi_range(MIN_ENEMIES, MAX_ENEMIES)
-	
-	player_party_manager = get_node("/root/Main/PlayerPartyManager") as PlayerPartyManager
 	var players = player_party_manager.players
 	var entities = get_node(entities_folder)
 	for i in range(num_enemies):

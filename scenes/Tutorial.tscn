@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://cek7k7yugu4ef"]
+[gd_scene load_steps=14 format=3 uid="uid://cg4hmt2jinnbb"]
 
 [ext_resource type="Texture2D" uid="uid://e2l70clolq7a" path="res://sprites/bg.png" id="1_3f21k"]
+[ext_resource type="Script" path="res://scripts/Scene.gd" id="1_gr1jt"]
 [ext_resource type="Texture2D" uid="uid://bla561mhk5u67" path="res://sprites/tile_0077.png" id="1_iq1mx"]
 [ext_resource type="Texture2D" uid="uid://bq5pv5tsg0msb" path="res://sprites/green-character.png" id="2_4y681"]
 [ext_resource type="Texture2D" uid="uid://qp5vd5q214ug" path="res://sprites/tile_0078.png" id="2_gmch4"]
 [ext_resource type="Texture2D" uid="uid://3n0dou6uwaea" path="res://sprites/red-character.png" id="3_vkwoo"]
 [ext_resource type="Texture2D" uid="uid://bharpj4hunshi" path="res://sprites/bug_enemy.png" id="5_42w8p"]
-[ext_resource type="Script" path="res://scenes/PlayButton.gd" id="7_pkb0c"]
+[ext_resource type="Script" path="res://scripts/ChangeSceneButton.gd" id="8_aksi1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uts5s"]
 atlas = ExtResource("3_vkwoo")
@@ -32,6 +33,7 @@ region = Rect2(2.08165e-12, 2.08165e-12, 36, 32)
 margin = Rect2(2.08165e-12, -8, 4, -8)
 
 [node name="Tutorial" type="Node2D"]
+script = ExtResource("1_gr1jt")
 
 [node name="Bg" type="Sprite2D" parent="."]
 modulate = Color(0.7, 0.7, 0.7, 1)
@@ -182,10 +184,12 @@ text = "Kill as many void bugs as possible!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer/UI/MarginContainer"]
+[node name="Button" type="Button" parent="CanvasLayer/UI/MarginContainer" node_paths=PackedStringArray("scene")]
 layout_mode = 2
 size_flags_vertical = 8
 text = "LET'S GO!"
-script = ExtResource("7_pkb0c")
+script = ExtResource("8_aksi1")
+level_name = "Main"
+scene = NodePath("../../../..")
 
 [node name="Camera2D" type="Camera2D" parent="."]

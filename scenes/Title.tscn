@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://crt0ng64jujmd"]
+
+[ext_resource type="Texture2D" path="res://sprites/bg.png" id="1_supwa"]
+[ext_resource type="FontFile" uid="uid://bdilgr4ke1gb3" path="res://scenes/paladins3d.ttf" id="2_x1ynd"]
+[ext_resource type="Script" path="res://scenes/PlayButton.gd" id="3_pgqq6"]
+
+[node name="Title" type="Node2D"]
+
+[node name="Bg" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(3, 3)
+texture = ExtResource("1_supwa")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -120.0
+offset_right = 250.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_x1ynd")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[wave amp=20 freq=5][center]Void Marines[/center][/wave]"
+
+[node name="Button" type="Button" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PLAY"
+script = ExtResource("3_pgqq6")
+
+[node name="Camera2D" type="Camera2D" parent="."]

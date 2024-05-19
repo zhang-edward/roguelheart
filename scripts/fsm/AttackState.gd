@@ -69,7 +69,7 @@ func get_animation_duration(sprite_frames: SpriteFrames, animation_name: StringN
 	return anim_duration
 
 func on_attacked(from: Player):
-	if from == null:
+	if from == null or _target == null:
 		return
 	# Target entity with more health
 	if from._health > _target._health:

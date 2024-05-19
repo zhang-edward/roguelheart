@@ -69,6 +69,8 @@ func set_move_target(target: Vector2):
 
 # TODO: Move this to an "abstract" base class
 func take_damage(amt: int, _from) -> void:
+	$BloodParticles.restart()
+	$BloodParticles.emitting = true
 	_health -= amt
 	healthbar.value = _health
 	if _health <= 0:
@@ -81,6 +83,8 @@ func aggro(_from: Node2D):
 func heal(amt: int) -> void:
 	_health += amt
 	healthbar.value = _health
+	$HealParticles.restart()
+	$HealParticles.emitting = true
 
 func is_dead() -> bool:
 	return _health <= 0

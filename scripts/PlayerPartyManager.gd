@@ -63,7 +63,9 @@ func _unhandled_input(event):
 				elif clicked_entity is Player and (selected_player.unit_type == Player.UnitType.HEALER):
 					selected_player.set_attack_target(clicked_entity)
 				else:
-					selected_player.set_move_target(get_global_mouse_position())
+					var screen_size = get_viewport().get_visible_rect().size
+					var move_target = Vector2(get_global_mouse_position().x, max(get_global_mouse_position().y, ( - screen_size.y / 2) + 120))
+					selected_player.set_move_target(move_target)
 
 # Use physics point query to see if we clicked on a player
 func physics_query_entity(pos: Vector2) -> Node2D:

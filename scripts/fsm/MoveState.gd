@@ -39,6 +39,8 @@ func draw_line_to_destination():
 	if _line_to_dest == null:
 		_line_to_dest = Line2D.new()
 		add_child(_line_to_dest)
+		_line_to_dest.end_cap_mode = Line2D.LINE_CAP_ROUND
+		_line_to_dest.begin_cap_mode = Line2D.LINE_CAP_ROUND
 		_line_to_dest.z_index = (entity as Player).z_index - 1
 		_line_to_dest.width = 10.0
 		_line_to_dest.default_color = Color(0, 0.71, 0, 1)

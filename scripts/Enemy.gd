@@ -18,7 +18,7 @@ var move_speed: int = 100
 func _ready():
 	var screen_size = get_viewport().get_visible_rect().size
 	var x = randi_range( - screen_size.x / 2, screen_size.x / 2)
-	var y = randi_range( - screen_size.y / 2, screen_size.y / 2)
+	var y = randi_range( - screen_size.y / 2, screen_size.y / 2) + 120
 	
 	position = Vector2(x, y)
 	
